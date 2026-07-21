@@ -224,25 +224,7 @@ hover:-translate-y-1">
 
 
 
-<div class="text-center mt-8">
-
-
-<p class="text-slate-400">
-
-ليس لديك حساب ؟
-
-{{-- <a href="{{ route('register') }}"
-
-class="text-indigo-400 font-bold hover:text-indigo-300"> --}}
-
-إنشاء حساب
-
-</a>
-
-</p>
-
-
-</div>
+ 
 
 
 </div>

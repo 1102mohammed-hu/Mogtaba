@@ -25,7 +25,7 @@ class poemRequest extends FormRequest
 
             'poem_title' => 'required|string',
             'poem_content' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg',
             'poem_link' => 'nullable|string',
 
         ];
