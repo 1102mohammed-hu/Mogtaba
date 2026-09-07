@@ -1,44 +1,108 @@
-# استخدام نسخة PHP الرسمية مع Apache
+# =========================================================
+# Laravel + PHP 8.2 + Apache
+# =========================================================
+
 FROM php:8.2-apache
 
-# تثبيت الإضافات الضرورية لـ Laravel و MySQL
+# =========================================================
+# System Dependencies
+# =========================================================
+
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
+    libzip-dev \
     zip \
     unzip \
     git \
-    curl
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
-# تثبيت إضافات PHP المطلوبة
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+# =========================================================
+# PHP Extensions
+# =========================================================
 
-# تفعيل خاصية mod_rewrite في Apache (ضرورية لـ Laravel)
+RUN docker-php-ext-install \
+    pdo_mysql \
+    mbstring \
+    exif \
+    pcntl \
+    bcmath \
+    gd
+
+# =========================================================
+# Apache Configuration
+# =========================================================
+
+# Disable mpm_event to avoid Apache MPM conflicts
+RUN a2dismod mpm_event || true
+
+# Enable prefork MPM
+RUN a2enmod mpm_prefork
+
+# Enable Laravel URL rewriting
 RUN a2enmod rewrite
 
-# ضبط المجلد الرئيسي للعمل
+# =========================================================
+# Laravel Document Root
+# =========================================================
+
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+
+RUN sed -ri \
+    -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
+    /etc/apache2/sites-available/000-default.conf
+
+RUN sed -ri \
+    -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
+    /etc/apache2/apache2.conf
+
+# =========================================================
+# Application Directory
+# =========================================================
+
 WORKDIR /var/www/html
 
-# نسخ ملفات المشروع إلى الحاوية
+# Copy Laravel project
 COPY . .
 
-# تثبيت Composer
+# =========================================================
+# Composer
+# =========================================================
+
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-RUN composer install --no-interaction --optimize-autoloader --no-dev
 
-# ضبط الصلاحيات لمجلدات Laravel
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN composer install \
+    --no-interaction \
+    --prefer-dist \
+    --optimize-autoloader \
+    --no-dev
 
-# تعديل إعدادات Apache لتوجه إلى مجلد public
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/000-default.conf
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
+# =========================================================
+# Laravel Permissions
+# =========================================================
 
-# فتح المنفذ 80
+RUN chown -R www-data:www-data \
+    /var/www/html/storage \
+    /var/www/html/bootstrap/cache
+
+# =========================================================
+# Start Script
+# =========================================================
+
+COPY start.sh /usr/local/bin/start.sh
+
+RUN chmod +x /usr/local/bin/start.sh
+
+# =========================================================
+# Port
+# =========================================================
+
 EXPOSE 80
 
-# السطر الذهبي: تنفيذ التهجير، زرع البيانات، وتشغيل السيرفر
-# تم استخدام --force لأننا في وضع الإنتاج (Production)
- # تأكد من استخدام هذا التنسيق لضمان استمرار تشغيل الحاوية
-ENTRYPOINT ["/bin/sh", "-c", "php artisan migrate --force && php artisan storage:link && apache2-foreground"]
+# =========================================================
+# Start Application
+# =========================================================
+
+CMD ["/usr/local/bin/start.sh"]
