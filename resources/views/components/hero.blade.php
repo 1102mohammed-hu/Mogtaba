@@ -316,14 +316,7 @@ line-height:2;
 
 color:#94a3b8;
 
-max-width:600px;
-
-
-}
-
-
-
-
+max-width:600px;}
 .buttons{
 
 
@@ -1323,7 +1316,7 @@ z-index:10;
     </div>
 
   <style>
-    .profile-wrapper{
+      .profile-wrapper{
 
     position:relative;
 
@@ -1338,6 +1331,7 @@ z-index:10;
     align-items:center;
 
 }
+
   </style>
 
 
