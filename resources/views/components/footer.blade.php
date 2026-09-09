@@ -26,7 +26,7 @@
 
         <p>
 
-         {{$userData->profile->bio}}
+         {{-- {{$userData->profile->bio}} --}}
 
         </p>
 
