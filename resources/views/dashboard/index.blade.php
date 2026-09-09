@@ -432,7 +432,7 @@ border-radius: 16px;
             <div class="badges">
                 <span class="badge">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
-                    {{ $user->profile?->job_title ?? 'Full Stack Developer' }}
+                    {{ $user->profile?->job_title ?? ' ' }}
                 </span>
                 <span class="badge">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
@@ -486,17 +486,27 @@ border-radius: 16px;
 
         <!-- زر التعديل -->
         <div class="profile-actions">
-            @if(is_null($user->profile))
-                <button class="btn-action btn-create">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
-                    انشاء ملف جديد
-                </button>
-            @else
-                 <button id="openProfileModal" class="action-btn btn-edit">
-                        <i class="fa-solid fa-user-gear"></i>
-                        تعديل البروفايل
-                    </button>
-            @endif
+    @if(is_null($user->profile))
+
+    <button id="openProfileModal" class="btn-action btn-create">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="16"></line>
+            <line x1="8" y1="12" x2="16" y2="12"></line>
+        </svg>
+
+        إنشاء ملف جديد
+    </button>
+
+@else
+
+    <button id="openProfileModal" class="action-btn btn-edit">
+        <i class="fa-solid fa-user-gear"></i>
+        تعديل البروفايل
+    </button>
+
+@endif
         </div>
     </div>
 </div>

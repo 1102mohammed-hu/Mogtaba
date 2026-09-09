@@ -11,10 +11,43 @@ use App\Models\services;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 class UserController extends Controller
 {
+    public function showRegister()
+    {
+        return view('auth.register');
+    }
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+        ], [
+            'name.required' => 'الاسم مطلوب',
+            'email.required' => 'البريد الإلكتروني مطلوب',
+            'email.email' => 'البريد الإلكتروني غير صحيح',
+            'email.unique' => 'البريد الإلكتروني مستخدم بالفعل',
+            'password.required' => 'كلمة المرور مطلوبة',
+            'password.min' => 'كلمة المرور يجب أن تكون 8 أحرف على الأقل',
+            'password.confirmed' => 'تأكيد كلمة المرور غير متطابق',
+        ]);
 
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        Auth::login($user);
+
+        $request->session()->regenerate();
+
+        return redirect('/')->with('success', 'تم إنشاء الحساب بنجاح');
+    }
     public function createUser(userRequest $Request)
     {
         $valiDate = $Request->validated();
@@ -73,16 +106,16 @@ class UserController extends Controller
     }
 
     public function logout(Request $request)
-{
-     Auth::logout();
+    {
+        Auth::logout();
 
-    // 2. إبطال الجلسة الحالية لضمان الأمان
-    $request->session()->invalidate();
+        // 2. إبطال الجلسة الحالية لضمان الأمان
+        $request->session()->invalidate();
 
-    // 3. إعادة إنتاج CSRF Token لحماية الطلبات القادمة
-    $request->session()->regenerateToken();
+        // 3. إعادة إنتاج CSRF Token لحماية الطلبات القادمة
+        $request->session()->regenerateToken();
 
-    // 4. إعادة التوجيه إلى صفحة تسجيل الدخول أو الرئيسية
-    return redirect()->route('login')->with('success', 'تم تسجيل الخروج بنجاح!');
-}
+        // 4. إعادة التوجيه إلى صفحة تسجيل الدخول أو الرئيسية
+        return redirect()->route('login')->with('success', 'تم تسجيل الخروج بنجاح!');
+    }
 }

@@ -3,7 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema; // تأكد من وجود هذا السطر في الأعلى
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,7 +21,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // هذا هو المكان الصحيح للسطر لضمان توافق الجداول مع MySQL السحابي
+        // توافق الجداول مع MySQL
         Schema::defaultStringLength(191);
+
+        // إجبار Laravel على استخدام HTTPS في الإنتاج
+        if (app()->environment('production')) {
+            URL::forceScheme('https');
+        }
     }
 }
