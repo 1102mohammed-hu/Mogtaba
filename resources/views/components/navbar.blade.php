@@ -98,7 +98,7 @@
             <div class="mobile-menu-brand">
 
                 <div class="mobile-brand-icon">
-                    <i class="fa-solid fa-user"></i>
+                 💦
                 </div>
 
                 <div>
@@ -120,7 +120,7 @@
                 id="mobileCloseBtn"
                 aria-label="إغلاق القائمة"
             >
-                <i class="fa-solid fa-xmark"></i>
+                <i class="fa fa-xmark">❌</i>
             </button>
 
         </div>
