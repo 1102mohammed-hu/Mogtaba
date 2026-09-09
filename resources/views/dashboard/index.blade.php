@@ -755,7 +755,7 @@ border-radius: 16px;
                 <div class="info-icon"><i class="fa-solid fa-laptop-code"></i></div>
                 <div class="info-text">
                     <span class="info-label">التخصص </span>
-                    <span class="info-value">{{ $user->profile->borrow }}</span>
+                    {{-- <span class="info-value">{{ $user->profile->borrow }}</span> --}}
                 </div>
             </div>
 
@@ -763,7 +763,7 @@ border-radius: 16px;
                 <div class="info-icon"><i class="fa-solid fa-user"></i></div>
                 <div class="info-text">
                     <span class="info-label"> نبذة</span>
-                    <span class="info-value">{{ $user->profile->bio }}</span>
+                    {{-- <span class="info-value">{{ $user->profile->bio }}</span> --}}
                 </div>
             </div>
         </div>
@@ -791,8 +791,7 @@ border-radius: 16px;
                 </div>
             </div>
 
-          
-
+        
             
         </div>
 
@@ -801,5 +800,4 @@ border-radius: 16px;
 </div>
 
 @include('dashboard.modals.profile-modal')
-
 @endsection
