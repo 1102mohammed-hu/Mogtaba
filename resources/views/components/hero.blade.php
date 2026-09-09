@@ -1279,11 +1279,13 @@ z-index:10;
                 </h1>
 
             <!-- النص مع تأثير الظهور كلمة كلمة -->
-<p class="hero-desc" id="typewriter-desc" data-text="{{ $userData->profile->bio }}"></p>
-
+<p class="hero-desc"
+   id="typewriter-desc"
+   data-text="{{ $userData?->profile?->bio ?? '' }}">
+</p>
                 <div class="buttons">
                    <a href="{{route('projects.show')}}" class="btn-primary">
-                        View Projects 🚀
+                        View Projects 
                     </a>
 
                     <a href="{{route('services.show')}}"  
