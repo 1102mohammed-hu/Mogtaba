@@ -48,12 +48,12 @@ class UserController extends Controller
 
         return redirect('/')->with('success', 'تم إنشاء الحساب بنجاح');
     }
-    public function createUser(userRequest $Request)
-    {
-        $valiDate = $Request->validated();
-        $user = User::create($valiDate);
-        return response()->json($user);
-    }
+    // public function createUser(userRequest $Request)
+    // {
+    //     $valiDate = $Request->validated();
+    //     $user = User::create($valiDate);
+    //     return response()->json($user);
+    // }
 
     public function login(Request $request)
     {

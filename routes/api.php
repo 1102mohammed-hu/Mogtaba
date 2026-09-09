@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('login', [UserController::class, 'login']);
-Route::post('createUser', [UserController::class, 'createUser']);
+// Route::post('createUser', [UserController::class, 'createUser']);
 Route::get('getMyInfo', [UserController::class, 'getMyInfo']);
 Route::get('showAllProjects', [ProjectsController::class, 'showAllProjects']);
 Route::get('showPoems', [PoemsController::class, 'show']); // مسار الهيرو العام للقصائد

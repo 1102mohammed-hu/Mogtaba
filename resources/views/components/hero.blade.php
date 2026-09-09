@@ -1266,20 +1266,20 @@ z-index:10;
             <!-- CONTENT -->
             <div class="hero-content">
                 <div class="badge">
-                    ✨ Welcome To My Portfolio
+                     Welcome To My Portfolio
                 </div>
 
                 <h1 class="hero-title">
-                    <span>{{ Str::before($userData->name, ' ') }}</span>
-                    {{ Str::after($userData->name, ' ') }}
+                    <span>{{ Str::before($userData->name?? ' ', ' ') }}</span>
+                    {{ Str::after($userData->name?? ' ', ' ') }}
                     <br>
                     <span>
-                        {{ $userData->profile->borrow }}
+                        {{ $userData->profile->borrow ?? '' }}
                     </span>
                 </h1>
 
             <!-- النص مع تأثير الظهور كلمة كلمة -->
-<p class="hero-desc" id="typewriter-desc" data-text="{{ $userData->profile->bio }}"></p>
+<p class="hero-desc" id="typewriter-desc" data-text="{{ $userData->profile->bio ?? '' }}"></p>
 
                 <div class="buttons">
                    <a href="{{route('projects.show')}}" class="btn-primary">
