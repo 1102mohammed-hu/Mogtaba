@@ -1063,13 +1063,31 @@ height:300px;
     justify-content: center;
 }
 
+/* التصميم الافتراضي (لابتوب / شاشات كبيرة) */
 .profile-container {
-    position: relative;
-    width: 336px;
-    height: 344px;
+width: 436px;
+    height: 439px;
     border-radius: 50%;
     z-index: 2;
+    top: 1pc;
+    left: -11px;
 }
+
+/* التصميم لشاشات الهاتف (أقل من 768px مثلاً) */
+@media (max-width: 768px) {
+    .profile-container {
+        position: relative;
+     
+        width: 316px;
+        height: 322px;
+
+        border-radius: 50%;
+        z-index: 2;
+        top: -38px;     /* لو تحتاج تعديل */
+        left: 61px;     /* لو تحتاج تعديل */
+    }
+}
+
 
 .image-glow {
     position: absolute;

@@ -14,9 +14,10 @@
     <div class="footer-brand">
 
         <h2>
+                {{Str::before($userData->name,' ') }} 
+
     <span>{{Str::after($userData->name,' ') }}</span>
 
-    {{Str::after($userData->name,' ') }} 
 
       
       
