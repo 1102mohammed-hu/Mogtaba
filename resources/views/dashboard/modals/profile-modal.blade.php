@@ -297,86 +297,218 @@
 .submit-btn.loading .spinner { display: block; }
 .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
 </style>
-
 <script>
- document.getElementById('editProfileForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const btn = document.getElementById('saveBtn');
-    btn.classList.add('loading');
-    btn.disabled = true;
+document.addEventListener('DOMContentLoaded', function () {
 
-    const formData = new FormData(this);
-    formData.append('_method', 'PUT'); 
+    // =========================
+    // Profile Modal
+    // =========================
 
-    try {
-        const response = await fetch("{{ route('profiles.update') }}", {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            }
+    const openProfileModal = document.getElementById('openProfileModal');
+    const profileModal = document.getElementById('profileModal');
+    const closeModal = document.getElementById('closeModal');
+
+    if (openProfileModal && profileModal) {
+
+        openProfileModal.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            profileModal.classList.add('active');
         });
-
-        const textData = await response.text();
-        let result;
-        
-        try {
-            result = JSON.parse(textData);
-        } catch(e) {
-            throw new Error('السيرفر لم يقم بإرجاع استجابة JSON صالحة.');
-        }
-
-        if (response.ok) {
-            Swal.fire({
-                icon: 'success',
-                title: 'تم التحديث بنجاح!',
-                text: result.message || 'تم حفظ بيانات ملفك الشخصي بنجاح',
-                background: '#0f172a',
-                color: '#fff',
-                confirmButtonColor: '#d946ef'
-            }).then(() => {
-                document.getElementById('profileModal').classList.remove('show');
-            });
-        } else {
-            let errorMsg = 'تأكد من صحة البيانات المدخلة';
-            if (result.errors) {
-                errorMsg = Object.values(result.errors).flat().join('\n');
-            } else if (result.message) {
-                errorMsg = result.message;
-            }
-            throw new Error(errorMsg);
-        }
-    } catch (err) {
-        Swal.fire({
-            icon: 'error',
-            title: 'خطأ في التحديث',
-            text: err.message || 'حدث خطأ غير متوقع، يرجى المحاولة لاحقاً',
-            background: '#0f172a',
-            color: '#fff',
-            confirmButtonColor: '#ef4444'
-        });
-    } finally {
-        btn.classList.remove('loading');
-        btn.disabled = false;
     }
-});
 
-document.getElementById('profile_image').addEventListener('change', function(e) {
-    const filename = e.target.files[0]?.name || 'انقر للتصفح أو اسحب الصورة';
-    this.nextElementSibling.querySelector('span').textContent = filename;
-});
+    if (closeModal && profileModal) {
 
-// إغلاق المودال عند الضغط على الـ X
-const closeModalBtn = document.getElementById('closeModal');
-const modal = document.getElementById('profileModal');
+        closeModal.addEventListener('click', function () {
 
-// إضافة حدث الضغط
-closeModalBtn.addEventListener('click', function() {
-    modal.classList.remove('show');
-    // إضافة تأخير بسيط لإخفاء المودال بعد انتهاء الأنيميشن
-    setTimeout(() => {
-    }, 400); 
+            profileModal.classList.remove('active');
+
+        });
+    }
+
+    // إغلاق عند الضغط خارج النافذة
+    if (profileModal) {
+
+        profileModal.addEventListener('click', function (e) {
+
+            if (e.target === profileModal) {
+                profileModal.classList.remove('active');
+            }
+
+        });
+    }
+
+
+    // =========================
+    // Sidebar
+    // =========================
+
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+
+    if (sidebar && sidebarToggle) {
+
+        sidebarToggle.addEventListener('click', function () {
+
+            sidebar.classList.toggle('collapsed');
+
+        });
+    }
+
+
+    // =========================
+    // Profile Image
+    // =========================
+
+    const profileImage = document.getElementById('profile_image');
+
+    if (profileImage) {
+
+        profileImage.addEventListener('change', function (e) {
+
+            const filename =
+                e.target.files[0]?.name ||
+                'انقر للتصفح أو اسحب الصورة';
+
+            const span =
+                this.nextElementSibling?.querySelector('span');
+
+            if (span) {
+                span.textContent = filename;
+            }
+
+        });
+    }
+
+
+    // =========================
+    // Update Profile
+    // =========================
+
+    const editProfileForm =
+        document.getElementById('editProfileForm');
+
+    if (editProfileForm) {
+
+        editProfileForm.addEventListener('submit', async function (e) {
+
+            e.preventDefault();
+
+            const btn = document.getElementById('saveBtn');
+
+            if (btn) {
+                btn.classList.add('loading');
+                btn.disabled = true;
+            }
+
+            const formData = new FormData(this);
+
+            formData.append('_method', 'PUT');
+
+            try {
+
+                const response = await fetch(
+                    "{{ route('profiles.update') }}",
+                    {
+                        method: 'POST',
+
+                        body: formData,
+
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRF-TOKEN':
+                                document
+                                    .querySelector('meta[name="csrf-token"]')
+                                    ?.getAttribute('content')
+                        }
+                    }
+                );
+
+                const result = await response.json();
+
+                if (!response.ok) {
+
+                    let errorMsg =
+                        result.message ||
+                        'حدث خطأ أثناء تحديث الملف الشخصي';
+
+                    if (result.errors) {
+
+                        errorMsg =
+                            Object.values(result.errors)
+                                .flat()
+                                .join('\n');
+                    }
+
+                    throw new Error(errorMsg);
+                }
+
+
+                // نجاح
+                if (typeof Swal !== 'undefined') {
+
+                    await Swal.fire({
+                        icon: 'success',
+                        title: 'تم التحديث بنجاح!',
+                        text:
+                            result.message ||
+                            'تم حفظ بيانات ملفك الشخصي بنجاح',
+                        background: '#0f172a',
+                        color: '#fff',
+                        confirmButtonColor: '#6366f1'
+                    });
+
+                } else {
+
+                    alert(
+                        result.message ||
+                        'تم تحديث الملف الشخصي بنجاح'
+                    );
+                }
+
+
+                // إغلاق المودال
+                if (profileModal) {
+                    profileModal.classList.remove('active');
+                }
+
+                // تحديث الصفحة
+                window.location.reload();
+
+            } catch (error) {
+
+                console.error(error);
+
+                if (typeof Swal !== 'undefined') {
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'خطأ في التحديث',
+                        text:
+                            error.message ||
+                            'حدث خطأ غير متوقع',
+                        background: '#0f172a',
+                        color: '#fff',
+                        confirmButtonColor: '#ef4444'
+                    });
+
+                } else {
+
+                    alert(error.message);
+
+                }
+
+            } finally {
+
+                if (btn) {
+                    btn.classList.remove('loading');
+                    btn.disabled = false;
+                }
+
+            }
+
+        });
+    }
+
 });
 </script>
