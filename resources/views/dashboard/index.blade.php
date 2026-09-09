@@ -509,7 +509,109 @@ border-radius: 16px;
 @endif
         </div>
     </div>
+    <button type="button" id="openAccountModal" class="profile-menu-item">
+    <i class="fa-solid fa-user-pen"></i>
+    تعديل الحساب
+</button>
 </div>
+
+<div id="accountModal" class="account-modal">
+
+    <div class="account-modal-content">
+
+        <div class="account-modal-header">
+            <div>
+                <span>إعدادات الحساب</span>
+                <h2>تعديل بياناتك</h2>
+            </div>
+
+            <button type="button" id="closeAccountModal" class="account-close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <form action="{{ route('account.update') }}" method="POST">
+
+            @csrf
+            @method('PUT')
+
+            <div class="account-field">
+                <label>
+                    <i class="fa-solid fa-user"></i>
+                    الاسم
+                </label>
+
+                <input
+                    type="text"
+                    name="name"
+                    value="{{ auth()->user()->name }}"
+                    required
+                >
+            </div>
+
+            <div class="account-field">
+                <label>
+                    <i class="fa-solid fa-envelope"></i>
+                    البريد الإلكتروني
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    value="{{ auth()->user()->email }}"
+                    required
+                >
+            </div>
+
+            <div class="account-divider">
+                <span>تغيير كلمة المرور</span>
+            </div>
+
+            <div class="account-field">
+                <label>
+                    <i class="fa-solid fa-lock"></i>
+                    كلمة المرور الجديدة
+                </label>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="اتركها فارغة إذا لا تريد تغييرها"
+                >
+            </div>
+
+            <div class="account-field">
+                <label>
+                    <i class="fa-solid fa-shield-halved"></i>
+                    تأكيد كلمة المرور
+                </label>
+
+                <input
+                    type="password"
+                    name="password_confirmation"
+                    placeholder="أعد كتابة كلمة المرور الجديدة"
+                >
+            </div>
+
+            <div class="account-modal-actions">
+
+                <button type="button" id="cancelAccountModal" class="account-btn cancel">
+                    إلغاء
+                </button>
+
+                <button type="submit" class="account-btn save">
+                    <i class="fa-solid fa-check"></i>
+                    حفظ التغييرات
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
 
 <style>
 .profile-card {
@@ -765,7 +867,7 @@ border-radius: 16px;
                 <div class="info-icon"><i class="fa-solid fa-laptop-code"></i></div>
                 <div class="info-text">
                     <span class="info-label">التخصص </span>
-                    {{-- <span class="info-value">{{ $user->profile->borrow }}</span> --}}
+                    <span class="info-value">{{ $user->profile->borrow }}</span>
                 </div>
             </div>
 
@@ -773,7 +875,7 @@ border-radius: 16px;
                 <div class="info-icon"><i class="fa-solid fa-user"></i></div>
                 <div class="info-text">
                     <span class="info-label"> نبذة</span>
-                    {{-- <span class="info-value">{{ $user->profile->bio }}</span> --}}
+                    <span class="info-value">{{ $user->profile->bio }}</span>
                 </div>
             </div>
         </div>
@@ -811,3 +913,4 @@ border-radius: 16px;
 
 @include('dashboard.modals.profile-modal')
 @endsection
+

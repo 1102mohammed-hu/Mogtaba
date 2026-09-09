@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Testing\Fluent\Concerns\Has;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -118,4 +119,45 @@ class UserController extends Controller
         // 4. إعادة التوجيه إلى صفحة تسجيل الدخول أو الرئيسية
         return redirect()->route('login')->with('success', 'تم تسجيل الخروج بنجاح!');
     }
+
+
+    public function updateAccount(Request $request)
+{
+    $user = Auth::user();
+
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+
+        'email' => [
+            'required',
+            'email',
+            'max:255',
+            Rule::unique('users', 'email')->ignore($user->id),
+        ],
+
+        'password' => 'nullable|string|min:8|confirmed',
+    ], [
+        'name.required' => 'الاسم مطلوب',
+        'name.max' => 'الاسم طويل جدًا',
+
+        'email.required' => 'البريد الإلكتروني مطلوب',
+        'email.email' => 'البريد الإلكتروني غير صحيح',
+        'email.unique' => 'البريد الإلكتروني مستخدم بالفعل',
+
+        'password.min' => 'كلمة المرور يجب أن تكون 8 أحرف على الأقل',
+        'password.confirmed' => 'تأكيد كلمة المرور غير متطابق',
+    ]);
+
+    $user->name = $validated['name'];
+    $user->email = $validated['email'];
+
+    // تغيير كلمة المرور فقط إذا تم إدخال كلمة مرور جديدة
+    if (!empty($validated['password'])) {
+        $user->password = Hash::make($validated['password']);
+    }
+
+    $user->save();
+
+    return back()->with('success', 'تم تحديث بيانات الحساب بنجاح');
+}
 }
