@@ -464,7 +464,7 @@ border-radius: 16px;
                 @if($user->profile?->social_links)
                   <i class="fa-solid fa-facebook"></i>
 
-                </a>
+                
                 @endif
 
                 @if($user->profile?->social_links2)

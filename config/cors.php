@@ -22,10 +22,10 @@ return [
     'allowed_origins' => [
         'http://localhost:5173', // للتطوير المحلي
         'http://localhost:3000', // احتياط للمحلي
-        'https://mogtab.netlify.app',
-        'https://mogtaba.vercel.app',
-        'https://mogtaba-front-end-1102mohammed-8454s-projects.vercel.app',
-        'https://mogtaba-git-main-1102mohammed-8454s-projects.vercel.app', // الرابط الفرعي المذكور في خطأ الكونسول
+        // 'https://mogtAI Gatewayab.netlify.app',
+        // 'https://mogtaba.vercel.app',
+        // 'https://mogtaba-front-end-1102mohammed-8454s-projects.vercel.app',
+        // 'https://mogtaba-git-main-1102mohammed-8454s-projects.vercel.app', // الرابط الفرعي المذكور في خطأ الكونسول
     ],
 
     'allowed_origins_patterns' => [],

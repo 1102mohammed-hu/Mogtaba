@@ -1,27 +1,5 @@
 document.addEventListener("DOMContentLoaded",()=>{
 
-
-const sidebar =
-document.getElementById("sidebar");
-
-
-const button =
-document.getElementById("sidebarToggle");
-
-
-
-if(button){
-
-button.addEventListener("click",()=>{
-
-sidebar.classList.toggle("collapsed");
-
-});
-
-}
-
-
-
 const openProfileModal =
 document.getElementById('openProfileModal');
 
@@ -75,17 +53,7 @@ profileModal.classList.remove('active');
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    // === 1. التحكم بفتح وإغلاق السايدبار وانزياح الصفحة ===
-    const dashboardWrapper = document.getElementById("dashboardWrapper");
-    const sidebarToggle = document.getElementById("sidebarToggle");
-
-    if (sidebarToggle && dashboardWrapper) {
-        sidebarToggle.addEventListener("click", () => {
-            dashboardWrapper.classList.toggle("sidebar-collapsed");
-        });
-    }
-
-    // === 2. التحكم في نافذة تعديل البروفايل (Modal) ===
+    // === التحكم في نافذة تعديل البروفايل (Modal) ===
     const openProfileModal = document.getElementById('openProfileModal');
     const closeProfileModal = document.getElementById('closeProfileModal');
     const profileModal = document.getElementById('profileModal');
