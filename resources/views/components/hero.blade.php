@@ -907,6 +907,7 @@ height:300px;
 }
 
 .hero {
+    
     min-height: 100vh;
     padding: 120px 24px;
     background-color: var(--bg-base);
@@ -1303,8 +1304,7 @@ z-index:10;
 </p>
                 <div class="buttons">
                    <a href="{{route('projects.show')}}" class="btn-primary">
-                        View Projects 
-                    </a>
+عرض المشاريع                    </a>
 
                     <a href="{{route('services.show')}}"  
  class="btn-secondary">

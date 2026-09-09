@@ -43,7 +43,17 @@ max-width: 1000px;        border-radius: 28px;
         border-radius: 24px !important;
     }
 </style>
-
+     <div class="header-wrapper">
+            <div class="header-badge">
+                <span class="badge-dot"></span>
+                <span> الدعم الفني</span>
+            </div>
+            <h1 class="projects-title">
+                تواصل <span>معي</span>
+            </h1>
+            <p class="projects-subtitle">
+اترك رسالتك اذا اردت اعلان , او الترويج لمشروعك             </p>
+        </div>
 <div class="contact-wrapper">
     <form id="contactForm">
         @csrf
