@@ -76,4 +76,4 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 //     return view('components.projects');
 // });
 Route::get('/register', [UserController::class, 'showRegister'])->name('register');
-Route::post('/createUser', [UserController::class, 'register'])->name('register.post');
+Route::post('/register', [UserController::class, 'register'])->name('register.post');
