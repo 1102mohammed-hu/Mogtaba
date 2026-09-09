@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <title>@yield('title', 'Dashboard')</title>
-    {{-- <link rel="icon" type="images/png" href="{{ asset('profile.png') }}"> --}}
-<meta name="csrf-token" content="{{ csrf_token() }}">
+ <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- Vite --}}
     @vite([
         'resources/css/app.css',
@@ -13,8 +13,6 @@
         'resources/js/app.js',
         'resources/js/dashboard.js'
     ])
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
     {{-- Tailwind CSS CDN --}}
     <script src="https://cdn.tailwindcss.com"></script>
      {{-- Google Font --}}

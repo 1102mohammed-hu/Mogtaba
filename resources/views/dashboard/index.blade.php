@@ -43,6 +43,10 @@
         display: flex;
         flex-direction: column;
         gap: 30px;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
     }
 
     /* 1. رأس الصفحة المطور (HEADER CARD) */
@@ -88,13 +92,13 @@
     }
 
     /* تأثيرات الأنيميشن على الصورة الشخصية والكاميرا */
-    .profile-avatar {
+    .profile-main .profile-avatar {
         position: relative;
         width: 150px;
         height: 150px;
     }
 
-    .profile-avatar img {
+    .profile-main .profile-avatar img {
         width: 150px;
         height: 150px;
         border-radius: 50%;
@@ -104,7 +108,7 @@
         transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .profile-avatar:hover img {
+    .profile-main .profile-avatar:hover img {
         transform: scale(1.05) rotate(1deg);
     }
 
@@ -126,17 +130,17 @@
         transition: all 0.3s;
     }
 
-    .profile-avatar:hover .change-image {
+    .profile-main .profile-avatar:hover .change-image {
         transform: rotate(360deg) scale(1.1);
         background: #312e81;
     }
 
-    .profile-info {
+    .profile-main .profile-info {
         flex: 1;
         padding-bottom: 10px;
     }
 
-    .profile-info h1 {
+    .profile-main .profile-info h1 {
         font-size: 1.8rem;
         font-weight: 800;
         color: white;
@@ -162,7 +166,7 @@
         gap: 6px;
     }
 
-    .profile-info p {
+    .profile-main .profile-info p {
         margin-top: 15px;
         color: var(--text-gray);
         font-size: 0.95rem;
@@ -409,7 +413,7 @@ border-radius: 16px;
             margin-top: -60px;
             padding: 20px;
         }
-        .profile-info {
+        .profile-main .profile-info {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -732,14 +736,14 @@ border-radius: 16px;
 .btn-camera:hover { transform: scale(1.1); }
 
 /* المعلومات */
-.profile-info {
+.profile-body .profile-info {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     gap: 10px;
     color: white;
 }
-.profile-info h1 {
+.profile-body .profile-info h1 {
     color: var(--kimi-color-text-primary);
     font-size: 1.6rem;
     font-weight: 700;

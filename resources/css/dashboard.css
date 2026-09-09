@@ -1247,11 +1247,17 @@ body {
 
     .dashboard-main {
 
+        flex: 0 0 100%;
+
         width: 100%;
 
         max-width: 100%;
 
         margin-right: 0;
+
+        padding: 0;
+
+        box-sizing: border-box;
 
     }
 
@@ -1452,8 +1458,14 @@ body {
 
     .dashboard-main {
 
+        flex: 0 0 100%;
+
         width: 100%;
         max-width: 100%;
+
+        margin-right: 0;
+        padding: 0;
+        box-sizing: border-box;
 
     }
 
