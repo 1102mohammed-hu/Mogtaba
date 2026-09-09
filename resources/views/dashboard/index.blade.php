@@ -388,6 +388,20 @@ border-radius: 16px;
 
     /* شاشات الجوال */
     @media (max-width: 768px) {
+        .profile-page-container {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .profile-card,
+        .profile-stats,
+        .profile-grid,
+        .info-card,
+        .stat-card {
+            min-width: 0;
+            max-width: 100%;
+        }
+
         .profile-main {
             flex-direction: column;
             align-items: center;
@@ -405,6 +419,34 @@ border-radius: 16px;
         }
         .profile-grid {
             grid-template-columns: 1fr;
+        }
+
+        .profile-body {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding-right: 20px;
+            padding-left: 20px;
+        }
+
+        .profile-info,
+        .profile-actions {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .badges,
+        .channels {
+            justify-content: center;
+        }
+
+        .skills-bar {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .profile-actions button {
+            max-width: 100%;
         }
     }
 </style>

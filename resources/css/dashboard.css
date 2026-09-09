@@ -1249,6 +1249,8 @@ body {
 
         width: 100%;
 
+        max-width: 100%;
+
         margin-right: 0;
 
     }
@@ -1404,7 +1406,9 @@ body {
         width: 100%;
         max-width: 100%;
         box-sizing: border-box;
+
     }
+
 
 }
 
@@ -1446,6 +1450,21 @@ body {
         overflow-x: hidden;
     }
 
+    .dashboard-main {
+
+        width: 100%;
+        max-width: 100%;
+
+    }
+
+    .projects-grid,
+    .messages-grid,
+    .services-grid {
+
+        grid-template-columns: minmax(0, 1fr);
+
+    }
+
 
     .mobile-sidebar-toggle {
 
@@ -1477,8 +1496,8 @@ body {
 
     .dashboard-content {
 
-        width: 100%;
-        max-width: 100%;
+    width: 100%;
+    max-width: 100%;
 
         padding:
             76px 11px 16px;

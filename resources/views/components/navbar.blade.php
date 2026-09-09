@@ -120,8 +120,7 @@
                 id="mobileCloseBtn"
                 aria-label="إغلاق القائمة"
             >
-                <i class="fa fa-xmark">❌</i>
-            </button>
+             </button>
 
         </div>
 
