@@ -1,1734 +1,3165 @@
- 
-<style>
-/* ==========================================================================
-   LITERARY & POETRY SHOWCASE
-   ========================================================================== */
-body{
-       margin: auto; 
-}
-@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Reem+Kufi:wght@500;700&display=swap');
+{{-- =========================================================
+     CINEMATIC POETRY GALLERY
+     PREMIUM RESPONSIVE VERSION
+     ========================================================= --}}
 
-:root {
-    --bg-base: #07090e;
-    --bg-surface: rgba(18, 15, 23, 0.75);
-    --bg-sidebar: rgba(13, 11, 18, 0.85);
+<section class="cinematic-poetry" id="poetryGallery">
 
-    --gold-primary: #d4af37;
-    --gold-glow: rgba(212, 175, 55, 0.25);
-    --gold-light: #f3e5ab;
-    --sepia-text: #e2d7c5;
-    --text-muted: #a69b8c;
+    {{-- =====================================================
+         HEADER
+         ===================================================== --}}
 
-    --border-glass: rgba(212, 175, 55, 0.18);
-    --border-glass-active: rgba(212, 175, 55, 0.55);
+    <div class="poetry-header">
 
-    --font-poetry: 'Amiri', serif;
-    --font-ui: 'Reem Kufi', sans-serif;
+        <div class="header-meta">
+            <span class="meta-line"></span>
+            <span>قصائد من القلب</span>
+        </div>
 
-    --radius-card: 28px;
-    --radius-sidebar-item: 16px;
-}
+        <div class="header-main">
 
-/* ==========================================================================
-   SECTION
-   ========================================================================== */
+            <h2>
+                مختارات
+                <span>شعرية</span>
+            </h2>
 
-.poems-section {
-    min-height: 100vh;
-    padding: 80px 24px;
-    background-color: var(--bg-base);
-    font-family: var(--font-ui);
-    direction: rtl;
-    position: relative;
-    overflow: hidden;
-    color: var(--sepia-text);
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: -8px;
-}
+            <p>
+                نصوص تعبر من الذاكرة إلى الورق،
+                ومن الورق إلى القارئ.
+            </p>
 
-.poems-section * {
-    box-sizing: border-box;
-}
+        </div>
 
-/* ==========================================================================
-   BACKGROUND
-   ========================================================================== */
+        <div class="poetry-counter">
 
-.bg-ambient-layer {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-}
+            <strong id="currentNumber">
+                01
+            </strong>
 
-.ambient-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(150px);
-    opacity: 0.3;
-    animation: orbFloat 25s infinite ease-in-out alternate;
-}
+            <span>/</span>
 
-.orb-1 {
-    width: 600px;
-    height: 600px;
-    top: -100px;
-    right: -100px;
-    background: radial-gradient(
-        circle,
-        #8a6d3b 0%,
-        rgba(0,0,0,0) 70%
-    );
-}
-
-.orb-2 {
-    width: 650px;
-    height: 650px;
-    bottom: -150px;
-    left: -150px;
-    background: radial-gradient(
-        circle,
-        #4a1525 0%,
-        rgba(0,0,0,0) 70%
-    );
-
-    animation-delay: -8s;
-}
-
-.bg-vintage-mesh {
-    position: absolute;
-    inset: 0;
-
-    background-image:
-        radial-gradient(
-            rgba(212, 175, 55, 0.05) 1px,
-            transparent 0
-        );
-
-    background-size: 32px 32px;
-    opacity: 0.6;
-}
-
-/* ==========================================================================
-   MAIN CONTAINER
-   ========================================================================== */
-
-.poems-container {
-    max-width: 1300px;
-    width: 100%;
-    margin: 0 auto;
-
-    position: relative;
-    z-index: 2;
-
-    display: grid;
-    grid-template-columns: 340px 1fr;
-
-    gap: 40px;
-    align-items: start;
-}
-
-/* ==========================================================================
-   SIDEBAR
-   ========================================================================== */
-
-.poems-sidebar {
-    grid-column: 1;
-
-    background: var(--bg-sidebar);
-
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-
-    border: 1px solid var(--border-glass);
-
-    border-radius: 24px;
-
-    padding: 28px 20px;
-
-    position: sticky;
-    top: 40px;
-
-    box-shadow:
-        0 20px 50px rgba(0,0,0,0.6);
-}
-
-.sidebar-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    margin-bottom: 28px;
-    padding-bottom: 16px;
-
-    border-bottom: 1px solid var(--border-glass);
-}
-
-.sidebar-header svg {
-    width: 24px;
-    height: 24px;
-
-    stroke: var(--gold-primary);
-}
-
-.sidebar-header h3 {
-    font-size: 1.2rem;
-    font-weight: 700;
-
-    margin: 0;
-
-    color: var(--gold-primary);
-
-    letter-spacing: 0.5px;
-}
-
-.poems-list {
-    display: flex;
-    flex-direction: column;
-
-    gap: 12px;
-
-    list-style: none;
-
-    padding: 0;
-    margin: 0;
-}
-
-.poem-nav-item {
-    padding: 16px 18px;
-
-    border-radius: var(--radius-sidebar-item);
-
-    background: rgba(255,255,255,0.025);
-
-    border: 1px solid rgba(212,175,55,0.08);
-
-    color: var(--text-muted);
-
-    font-size: 1.05rem;
-    font-weight: 500;
-
-    cursor: pointer;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    transition:
-        all 0.4s cubic-bezier(0.16,1,0.3,1);
-
-    position: relative;
-}
-
-.poem-item-content {
-    display: flex;
-    align-items: center;
-
-    gap: 12px;
-}
-
-.poem-item-icon {
-    width: 20px;
-    height: 20px;
-
-    stroke: var(--text-muted);
-
-    transition:
-        stroke 0.3s ease;
-}
-
-.poem-nav-item:hover {
-    background: rgba(212,175,55,0.05);
-
-    color: var(--gold-light);
-
-    transform: translateX(-4px);
-
-    border-color: rgba(212,175,55,0.25);
-}
-
-.poem-nav-item:hover .poem-item-icon {
-    stroke: var(--gold-primary);
-}
-
-.poem-nav-item.active {
-    background:
-        linear-gradient(
-            135deg,
-            rgba(212,175,55,0.15),
-            rgba(74,21,37,0.3)
-        );
-
-    border-color: var(--border-glass-active);
-
-    color: var(--gold-primary);
-
-    box-shadow:
-        0 10px 25px -5px var(--gold-glow),
-        inset 0 1px 0 rgba(255,255,255,0.1);
-}
-
-.poem-nav-item.active .poem-item-icon {
-    stroke: var(--gold-primary);
-}
-
-.poem-nav-item .arrow-icon {
-    width: 16px;
-    height: 16px;
-
-    stroke: var(--gold-primary);
-
-    opacity: 0;
-
-    transform: translateX(10px);
-
-    transition: all 0.3s ease;
-}
-
-.poem-nav-item.active .arrow-icon {
-    opacity: 1;
-
-    transform: translateX(0);
-}
-
-/* ==========================================================================
-   MAIN POEM CARD
-   ========================================================================== */
-
-.poem-display-card {
-    grid-column: 2;
-
-    background: var(--bg-surface);
-
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-
-    border: 1px solid var(--border-glass);
-
-    border-radius: var(--radius-card);
-
-    padding: 60px 40px;
-
-    position: relative;
-
-    min-height: 540px;
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-
-    text-align: center;
-
-    box-shadow:
-        0 30px 80px -20px rgba(0,0,0,0.9),
-        inset 0 1px 0 rgba(212,175,55,0.2);
-
-    overflow: hidden;
-}
-
-.poem-display-card::after {
-    content: '';
-
-    position: absolute;
-
-    top: -20px;
-    left: -20px;
-
-    width: 220px;
-    height: 220px;
-
-    background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(212, 175, 55, 0.03)' stroke-width='1'%3E%3Cpath d='M20.24 12.24a6 6 0 0 0-8.49-8.49L3 13.5V21h7.5l9.74-9.76z'/%3E%3Cpath d='M16 8L2 22'/%3E%3Cpath d='M17.5 15H9'/%3E%3C/svg%3E");
-
-    background-size: contain;
-    background-repeat: no-repeat;
-
-    pointer-events: none;
-}
-
-.poem-view-wrapper {
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-}
-
-/* ==========================================================================
-   POEM IMAGE
-   ========================================================================== */
-
-.poem-avatar-wrapper {
-    position: relative;
-
-    width: 180px;
-    height: 180px;
-
-    margin-bottom: 32px;
-}
-
-.poem-avatar-wrapper::before {
-    content: '';
-
-    position: absolute;
-
-    inset: -6px;
-
-    border-radius: 50%;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--gold-primary),
-            #8a6d3b,
-            #4a1525
-        );
-
-    opacity: 0.85;
-
-    filter: blur(10px);
-
-    transition: opacity 0.5s ease;
-}
-
-.poem-avatar-img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    border-radius: 50%;
-
-    position: relative;
-    z-index: 2;
-
-    border: 3px solid var(--gold-primary);
-
-    box-shadow:
-        0 15px 35px rgba(0,0,0,0.7);
-}
-
-/* ==========================================================================
-   TITLE
-   ========================================================================== */
-
-.main-poem-title {
-    font-family: var(--font-poetry);
-
-    font-size: 3.2rem;
-    font-weight: 700;
-
-    color: var(--gold-light);
-
-    margin: 0 0 32px 0;
-
-    line-height: 1.2;
-
-    text-shadow:
-        0 4px 20px rgba(0,0,0,0.8);
-
-    background:
-        linear-gradient(
-            180deg,
-            #ffffff 0%,
-            var(--gold-light) 60%,
-            var(--gold-primary) 100%
-        );
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* ==========================================================================
-   POEM CONTENT
-   ========================================================================== */
-
-.main-poem-content {
-    font-family: var(--font-poetry);
-
-    font-size: 1.65rem;
-
-    line-height: 2.3;
-
-    color: var(--sepia-text);
-
-    white-space: pre-line;
-
-    max-width: 700px;
-
-    margin: 0 0 40px 0;
-
-    font-weight: 400;
-}
-
-/* ==========================================================================
-   ACTION BUTTON
-   ========================================================================== */
-
-.poem-action-btn {
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    padding: 14px 36px;
-
-    border-radius: 100px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(212,175,55,0.15),
-            rgba(74,21,37,0.4)
-        );
-
-    border: 1px solid var(--border-glass-active);
-
-    color: var(--gold-light);
-
-    font-size: 1.05rem;
-    font-weight: 700;
-
-    text-decoration: none;
-
-    transition: all 0.4s ease;
-
-    box-shadow:
-        0 10px 25px -5px var(--gold-glow);
-}
-
-.poem-action-btn:hover {
-    background:
-        linear-gradient(
-            135deg,
-            var(--gold-primary),
-            #8a6d3b
-        );
-
-    color: #000000;
-
-    transform: translateY(-3px);
-
-    box-shadow:
-        0 15px 35px var(--gold-glow);
-}
-
-.poem-action-btn svg {
-    width: 20px;
-    height: 20px;
-
-    stroke: currentColor;
-}
-
-/* ==========================================================================
-   ANIMATIONS
-   ========================================================================== */
-
-.anim-slide-up {
-    animation:
-        slideUpFadeIn
-        0.75s
-        cubic-bezier(0.16,1,0.3,1)
-        forwards;
-}
-
-.anim-fade-out {
-    animation:
-        fadeOutDown
-        0.4s
-        cubic-bezier(0.7,0,0.84,0)
-        forwards;
-}
-
-@keyframes slideUpFadeIn {
-
-    0% {
-        opacity: 0;
-        transform:
-            translateY(45px)
-            scale(0.97);
-
-        filter: blur(10px);
-    }
-
-    100% {
-        opacity: 1;
-        transform:
-            translateY(0)
-            scale(1);
-
-        filter: blur(0);
-    }
-}
-
-@keyframes fadeOutDown {
-
-    0% {
-        opacity: 1;
-        transform:
-            translateY(0)
-            scale(1);
-
-        filter: blur(0);
-    }
-
-    100% {
-        opacity: 0;
-        transform:
-            translateY(30px)
-            scale(0.97);
-
-        filter: blur(10px);
-    }
-}
-
-@keyframes orbFloat {
-
-    0% {
-        transform:
-            translate(0,0)
-            scale(1);
-    }
-
-    50% {
-        transform:
-            translate(60px,80px)
-            scale(1.15);
-    }
-
-    100% {
-        transform:
-            translate(-40px,-50px)
-            scale(0.95);
-    }
-}
-
-
-/* ==========================================================================
-   📱 TABLETS + MOBILE
-   القائمة تبقى بجانب القصيدة
-   ========================================================================== */
-
-@media (max-width: 992px) {
-
-    .poems-section {
-        min-height: 100vh;
-
-        width: 100%;
-
-        padding: 70px 10px 20px;
-
-        margin: 0;
-
-        display: flex;
-
-        align-items: flex-start;
-
-        justify-content: center;
-
-        overflow: hidden;
-    }
-
-    .poems-container {
-
-        width: 100%;
-
-        max-width: 100%;
-
-        margin: 0;
-
-        display: grid;
-
-        /* القائمة أكبر قليلًا */
-        grid-template-columns:
-            125px
-            minmax(0,1fr);
-
-        gap: 12px;
-
-        align-items: start;
-    }
-
-
-    /* ==========================================================
-       SIDEBAR
-       ========================================================== */
-
-    .poems-sidebar {
-
-        grid-column: 1;
-        grid-row: 1;
-
-        width: 125px;
-
-        padding: 14px 8px;
-
-        position: sticky;
-
-        top: 70px;
-
-        border-radius: 17px;
-
-        /*
-         * القائمة نفسها قابلة للسكرول
-         */
-        max-height:
-            calc(100vh - 90px);
-
-        overflow-y: auto;
-
-        overflow-x: hidden;
-
-        scrollbar-width: thin;
-
-        /*
-         * حدود أوضح
-         */
-        border:
-            1px solid
-            rgba(212,175,55,0.30);
-
-        box-shadow:
-            0 15px 35px
-            rgba(0,0,0,0.55);
-    }
-
-    /* Scrollbar */
-    .poems-sidebar::-webkit-scrollbar {
-        width: 5px;
-    }
-
-    .poems-sidebar::-webkit-scrollbar-track {
-        background:
-            rgba(255,255,255,0.03);
-
-        border-radius: 10px;
-    }
-
-    .poems-sidebar::-webkit-scrollbar-thumb {
-        background:
-            rgba(212,175,55,0.55);
-
-        border-radius: 10px;
-    }
-
-
-    /* عنوان القائمة */
-
-    .sidebar-header {
-
-        display: flex;
-
-        flex-direction: column;
-
-        justify-content: center;
-
-        align-items: center;
-
-        gap: 7px;
-
-        margin-bottom: 14px;
-
-        padding-bottom: 11px;
-
-        text-align: center;
-
-        border-bottom:
-            1px solid
-            rgba(212,175,55,0.25);
-    }
-
-    .sidebar-header svg {
-
-        width: 21px;
-        height: 21px;
-    }
-
-    .sidebar-header h3 {
-
-        font-size: 0.82rem;
-
-        line-height: 1.5;
-
-        text-align: center;
-
-        letter-spacing: 0;
-
-        color:
-            var(--gold-primary);
-
-        font-family:
-            'Amiri',
-            serif;
-
-        margin: 0;
-    }
-
-
-    /* قائمة القصائد */
-
-    .poems-list {
-
-        width: 100%;
-
-        gap: 8px;
-    }
-
-
-    .poem-nav-item {
-
-        width: 100%;
-
-        min-height: 62px;
-
-        padding: 9px 6px;
-
-        border-radius: 11px;
-
-        /*
-         * الخط أكبر وأوضح
-         */
-        font-size: 0.76rem;
-
-        line-height: 1.55;
-
-        color: #eeeeee;
-
-        justify-content: center;
-
-        border:
-            1px solid
-            rgba(212,175,55,0.12);
-    }
-
-
-    .poem-item-content {
-
-        width: 100%;
-
-        display: flex;
-
-        flex-direction: column;
-
-        align-items: center;
-
-        justify-content: center;
-
-        gap: 5px;
-
-        text-align: center;
-    }
-
-
-    .poem-item-content span {
-
-        width: 100%;
-
-        display: -webkit-box;
-
-        -webkit-box-orient: vertical;
-
-        -webkit-line-clamp: 3;
-
-        overflow: hidden;
-
-        word-break: break-word;
-
-        overflow-wrap: anywhere;
-    }
-
-
-    .poem-item-icon {
-
-        width: 18px;
-        height: 18px;
-
-        flex-shrink: 0;
-    }
-
-
-    .poem-nav-item .arrow-icon {
-
-        display: none;
-    }
-
-
-    /* ==========================================================
-       POEM CARD
-       ========================================================== */
-
-    .poem-display-card {
-
-        grid-column: 2;
-
-        grid-row: 1;
-
-        width: 100%;
-
-        min-width: 0;
-
-        min-height:
-            calc(100vh - 110px);
-
-        max-height:
-            calc(100vh - 110px);
-
-        padding:
-            25px
-            14px
-            30px;
-
-        border-radius: 18px;
-
-        overflow-y: auto;
-
-        overflow-x: hidden;
-
-        align-items: center;
-
-        scrollbar-width: thin;
-    }
-
-
-    .poem-view-wrapper {
-
-        width: 100%;
-
-        min-width: 0;
-
-        display: flex;
-
-        flex-direction: column;
-
-        align-items: center;
-    }
-
-
-    /* صورة القصيدة */
-
-    .poem-avatar-wrapper {
-
-        width: 95px;
-        height: 95px;
-
-        margin-bottom: 18px;
-
-        flex-shrink: 0;
-    }
-
-
-    /* عنوان القصيدة */
-
-    .main-poem-title {
-
-        width: 100%;
-
-        font-size: 1.7rem;
-
-        line-height: 1.45;
-
-        margin:
-            0
-            0
-            18px;
-
-        padding:
-            0
-            5px;
-
-        word-break: break-word;
-
-        overflow-wrap: anywhere;
-    }
-
-
-    /* النص */
-
-    .main-poem-content {
-
-        width: 100%;
-
-        max-width: 100%;
-
-        /*
-         * أكبر وأكثر وضوحًا
-         */
-        font-size: 1.3rem;
-
-        line-height: 2.15;
-
-        margin:
-            0
-            0
-            22px;
-
-        padding:
-            0
-            6px;
-
-        white-space: pre-line;
-
-        word-break: normal;
-
-        overflow-wrap: anywhere;
-
-        text-align: center;
-    }
-
-
-    /* الزر */
-
-    .poem-action-btn {
-
-        width: 100%;
-
-        max-width: 220px;
-
-        padding:
-            12px
-            14px;
-
-        font-size: 0.82rem;
-
-        gap: 7px;
-
-        justify-content: center;
-
-        flex-shrink: 0;
-    }
-
-    .poem-action-btn svg {
-
-        width: 18px;
-        height: 18px;
-    }
-}
-
-
-/* ==========================================================================
-   📱 430px
-   ========================================================================== */
-
-@media (max-width: 430px) {
-
-    .poems-section {
-
-        padding:
-            68px
-            6px
-            12px;
-    }
-
-
-    .poems-container {
-
-        /*
-         * القائمة أصبحت أكبر قليلًا
-         * حتى تبقى العناوين واضحة
-         */
-        grid-template-columns:
-            108px
-            minmax(0,1fr);
-
-        gap: 8px;
-    }
-
-
-    /* القائمة */
-
-    .poems-sidebar {
-
-        width: 108px;
-
-        padding:
-            10px
-            5px;
-
-        top: 68px;
-
-        max-height:
-            calc(100vh - 80px);
-
-        border-radius: 14px;
-
-        border:
-            1px solid
-            rgba(212,175,55,0.32);
-    }
-
-
-    .sidebar-header {
-
-        margin-bottom: 11px;
-
-        padding-bottom: 9px;
-    }
-
-
-    .sidebar-header svg {
-
-        width: 18px;
-        height: 18px;
-    }
-
-
-    .sidebar-header h3 {
-
-        font-size: 0.73rem;
-    }
-
-
-    .poem-nav-item {
-
-        min-height: 58px;
-
-        padding:
-            8px
-            4px;
-
-        /*
-         * الخط أوضح
-         */
-        font-size: 0.69rem;
-
-        line-height: 1.55;
-
-        border-radius: 9px;
-    }
-
-
-    .poem-item-content {
-
-        gap: 5px;
-    }
-
-
-    .poem-item-icon {
-
-        width: 16px;
-        height: 16px;
-    }
-
-
-    /* بطاقة القصيدة */
-
-    .poem-display-card {
-
-        min-height:
-            calc(100vh - 100px);
-
-        max-height:
-            calc(100vh - 100px);
-
-        padding:
-            22px
-            10px
-            25px;
-
-        border-radius: 16px;
-    }
-
-
-    /* الصورة */
-
-    .poem-avatar-wrapper {
-
-        width: 84px;
-        height: 84px;
-
-        margin-bottom: 15px;
-    }
-
-
-    /* العنوان */
-
-    .main-poem-title {
-
-        font-size: 1.5rem;
-
-        line-height: 1.45;
-
-        margin-bottom: 15px;
-    }
-
-
-    /* النص */
-
-    .main-poem-content {
-
-        font-size: 1.05rem;
-
-        line-height: 2;
-
-        padding:
-            0
-            3px;
-    }
-
-
-    /* الزر */
-
-    .poem-action-btn {
-
-        max-width: 195px;
-
-        padding:
-            10px;
-
-        font-size: 0.72rem;
-    }
-}
-
-
-/* ==========================================================================
-   📱 360px وأقل
-   ========================================================================== */
-
-@media (max-width: 360px) {
-
-    .poems-section {
-
-        padding-left: 4px;
-
-        padding-right: 4px;
-    }
-
-
-    .poems-container {
-
-        /*
-         * لا نجعل القائمة صغيرة جدًا
-         */
-        grid-template-columns:
-            98px
-            minmax(0,1fr);
-
-        gap: 6px;
-    }
-
-
-    .poems-sidebar {
-
-        width: 98px;
-
-        padding:
-            9px
-            4px;
-    }
-
-
-    .sidebar-header h3 {
-
-        font-size: 0.67rem;
-    }
-
-
-    .poem-nav-item {
-
-        font-size: 0.62rem;
-
-        min-height: 54px;
-
-        padding:
-            7px
-            4px;
-    }
-
-
-    .poem-item-icon {
-
-        width: 15px;
-        height: 15px;
-    }
-
-
-    .poem-display-card {
-
-        padding:
-            20px
-            8px
-            22px;
-    }
-
-
-    .poem-avatar-wrapper {
-
-        width: 74px;
-        height: 74px;
-    }
-
-
-    .main-poem-title {
-
-        font-size: 1.22rem;
-    }
-
-
-    .main-poem-content {
-
-        font-size: 0.92rem;
-
-        line-height: 1.9;
-    }
-}
-
-
-/* ==========================================================================
-   REDUCED MOTION
-   ========================================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-
-    .ambient-orb,
-    .anim-slide-up,
-    .anim-fade-out {
-
-        animation: none;
-    }
-}
-</style>
-
-
-<section class="poems-section">
-
-    <!-- BACKGROUND -->
-
-    <div class="bg-ambient-layer">
-
-        <div class="ambient-orb orb-1"></div>
-
-        <div class="ambient-orb orb-2"></div>
-
-        <div class="bg-vintage-mesh"></div>
-
-    </div>
-
-
-    <div class="poems-container">
-
-
-        <!-- =========================================================
-             SIDEBAR
-             ========================================================= -->
-
-        <aside class="poems-sidebar">
-
-            <div class="sidebar-header">
-
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                >
-                    <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L3 13.5V21h7.5l9.74-9.76z"/>
-                    <line x1="16" y1="8" x2="2" y2="22"/>
-                    <line x1="17.5" y1="15" x2="9" y2="15"/>
-                </svg>
-
-                <h3>
-                    قائمة القصائد
-                </h3>
-
-            </div>
-
-
-            <ul class="poems-list">
-
-                @foreach ($poems as $index => $poem)
-
-                    <li
-                        class="poem-nav-item {{ $index === 0 ? 'active' : '' }}"
-
-                        data-title="{{ $poem->poem_title }}"
-
-                        data-content="{{ $poem->poem_content }}"
-
-                        data-image="{{ $poem->image
-                            ? asset('storage/' . $poem->image)
-                            : asset('images/profile.png') }}"
-
-                        data-link="{{ $poem->poem_link ?? '' }}"
-
-                        onclick="switchPoem(this)"
-                    >
-
-                        <div class="poem-item-content">
-
-
-                            @switch($index % 4)
-
-                                @case(0)
-
-                                    <!-- Feather -->
-
-                                    <svg
-                                        class="poem-item-icon"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke-width="2"
-                                    >
-
-                                        <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L3 13.5V21h7.5l9.74-9.76z"/>
-
-                                    </svg>
-
-                                @break
-
-
-                                @case(1)
-
-                                    <!-- Book -->
-
-                                    <svg
-                                        class="poem-item-icon"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke-width="2"
-                                    >
-
-                                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-
-                                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-
-                                    </svg>
-
-                                @break
-
-
-                                @case(2)
-
-                                    <!-- Paper -->
-
-                                    <svg
-                                        class="poem-item-icon"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke-width="2"
-                                    >
-
-                                        <path d="M19 17h2c.6 0 1-.4 1-1V4c0-.6-.4-1-1-1H3c-.6 0-1 .4-1 1v12c0 .6.4 1 1 1h2"/>
-
-                                        <path d="M7 17h10M7 21h10"/>
-
-                                    </svg>
-
-                                @break
-
-
-                                @default
-
-                                    <!-- Candle -->
-
-                                    <svg
-                                        class="poem-item-icon"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke-width="2"
-                                    >
-
-                                        <path d="M12 2c.8 2.3 2 3.5 2 5a2 2 0 0 1-4 0c0-1.5 1.2-2.7 2-5z"/>
-
-                                        <path d="M7 22h10v-9a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v9z"/>
-
-                                    </svg>
-
-                            @endswitch
-
-
-                            <span>
-                                {{ $poem->poem_title }}
-                            </span>
-
-                        </div>
-
-
-                        <svg
-                            class="arrow-icon"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke-width="2.5"
-                        >
-
-                            <path d="M15 18l-6-6 6-6"/>
-
-                        </svg>
-
-                    </li>
-
-                @endforeach
-
-            </ul>
-
-        </aside>
-
-
-        <!-- =========================================================
-             POEM DISPLAY
-             ========================================================= -->
-
-        <div class="poem-display-card">
-
-            @if(isset($poems) && count($poems) > 0)
-
-                <div
-                    class="poem-view-wrapper anim-slide-up"
-                    id="poemDisplayArea"
-                >
-
-
-                    <!-- IMAGE -->
-
-                    <div class="poem-avatar-wrapper">
-
-                        <img
-                            id="poemImg"
-
-                            class="poem-avatar-img"
-
-                            src="{{ $poems[0]->image
-                                ? asset('storage/' . $poems[0]->image)
-                                : asset('images/profile.png') }}"
-
-                            alt="{{ $poems[0]->poem_title }}"
-                        >
-
-                    </div>
-
-
-                    <!-- TITLE -->
-
-                    <h2
-                        class="main-poem-title"
-                        id="poemTitle"
-                    >
-
-                        {{ $poems[0]->poem_title }}
-
-                    </h2>
-
-
-                    <!-- CONTENT -->
-
-                    <p
-                        class="main-poem-content"
-                        id="poemContent"
-                    >
-
-                        {{ $poems[0]->poem_content }}
-
-                    </p>
-
-
-                    <!-- LINK -->
-
-                    @if(!empty($poems[0]->poem_link))
-
-                        <a
-                            id="poemLink"
-
-                            href="{{ $poems[0]->poem_link }}"
-
-                            target="_blank"
-
-                            rel="noopener noreferrer"
-
-                            class="poem-action-btn"
-                        >
-
-                            <svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke-width="2"
-                            >
-
-                                <path d="M12 19l7-7 3 3-7 7-3-3z"/>
-
-                                <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
-
-                            </svg>
-
-                            <span>
-                                استمع أو اقرأ المزيد
-                            </span>
-
-                        </a>
-
-                    @else
-
-                        <a
-                            id="poemLink"
-
-                            href="#"
-
-                            target="_blank"
-
-                            class="poem-action-btn"
-
-                            style="display:none;"
-                        >
-
-                            <svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke-width="2"
-                            >
-
-                                <path d="M12 19l7-7 3 3-7 7-3-3z"/>
-
-                            </svg>
-
-                            <span>
-                                استمع أو اقرأ المزيد
-                            </span>
-
-                        </a>
-
-                    @endif
-
-                </div>
-
-            @else
-
-                <div class="poem-view-wrapper">
-
-                    <h2 class="main-poem-title">
-                        لا توجد قصائد حالياً
-                    </h2>
-
-                </div>
-
-            @endif
+            <span id="totalNumber">
+                {{ str_pad(count($poems), 2, '0', STR_PAD_LEFT) }}
+            </span>
 
         </div>
 
     </div>
 
+
+    @if($poems->count())
+
+
+        {{-- =================================================
+             VIEW ALL BUTTON
+             ================================================= --}}
+
+        <div class="all-poems-action">
+
+            <button
+                type="button"
+                id="openAllPoems"
+                class="all-poems-button"
+            >
+
+                <span class="all-poems-icon">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </span>
+
+                <span>
+                    عرض جميع القصائد
+                </span>
+
+                <b>↗</b>
+
+            </button>
+
+        </div>
+
+
+        {{-- =================================================
+             MAIN GALLERY
+             ================================================= --}}
+
+        <div class="poetry-gallery-wrapper">
+
+            <div
+                class="gallery-track"
+                id="poetryTrack"
+            >
+
+                @foreach($poems as $index => $poem)
+
+                    @php
+
+                        $image = $poem->image
+                            ? asset('storage/' . $poem->image)
+                            : asset('images/profile.png');
+
+                    @endphp
+
+
+                    <article
+                        class="poem-slide {{ $index === 0 ? 'active' : '' }}"
+
+                        data-index="{{ $index }}"
+
+                        data-title="{{ e($poem->poem_title) }}"
+
+                        data-content="{{ e($poem->poem_content) }}"
+
+                        data-image="{{ $image }}"
+
+                        data-link="{{ e($poem->poem_link ?? '') }}"
+                    >
+
+                        {{-- رقم القصيدة --}}
+
+                        <div class="slide-number">
+
+                            {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
+
+                        </div>
+
+
+                        {{-- الصورة --}}
+
+                        <div class="slide-image">
+
+                            <img
+                                src="{{ $image }}"
+                                alt="{{ $poem->poem_title }}"
+                                loading="{{ $index === 0 ? 'eager' : 'lazy' }}"
+                            >
+
+                            <div class="image-overlay"></div>
+
+                            <span class="image-label">
+                                قصيدة
+                            </span>
+
+                        </div>
+
+
+                        {{-- العنوان --}}
+
+                        <div class="slide-title">
+
+                            {{ $poem->poem_title }}
+
+                        </div>
+
+                    </article>
+
+                @endforeach
+
+            </div>
+
+        </div>
+
+
+        {{-- =================================================
+             NAVIGATION
+             ================================================= --}}
+
+        <div class="gallery-navigation">
+
+            <button
+                type="button"
+                class="gallery-btn"
+                id="prevPoem"
+                aria-label="القصيدة السابقة"
+            >
+
+                <span>←</span>
+
+                السابقة
+
+            </button>
+
+
+            <div class="progress-container">
+
+                <div class="progress-track">
+
+                    <div
+                        class="progress-bar"
+                        id="poetryProgress"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="gallery-btn"
+                id="nextPoem"
+                aria-label="القصيدة التالية"
+            >
+
+                التالية
+
+                <span>→</span>
+
+            </button>
+
+        </div>
+
+
+        {{-- =================================================
+             SELECTED POEM
+             ================================================= --}}
+
+        <div
+            class="selected-poem"
+            id="selectedPoem"
+        >
+
+            <div class="selected-index">
+
+                <span>
+                    النص
+                </span>
+
+                <strong id="detailNumber">
+                    01
+                </strong>
+
+            </div>
+
+
+            <div class="selected-content">
+
+                <div class="selected-heading">
+
+                    <span class="eyebrow">
+                        من دفتر القصائد
+                    </span>
+
+                    <h1 id="poemTitle">
+                        {{ $poems->first()->poem_title }}
+                    </h1>
+
+                </div>
+
+
+                <div class="poem-divider">
+
+                    <span></span>
+
+                    <i></i>
+
+                    <span></span>
+
+                </div>
+
+
+                <div
+                    class="poem-text"
+                    id="poemContent"
+                >
+                    {!! nl2br(e($poems->first()->poem_content)) !!}
+                </div>
+
+
+                <div class="selected-footer">
+
+                    <a
+                        href="{{ $poems->first()->poem_link ?? '#' }}"
+                        id="poemLink"
+                        class="read-button"
+
+                        style="{{ empty($poems->first()->poem_link) ? 'display:none;' : '' }}"
+                    >
+
+                        <span>
+                            رابط القصيدة
+                        </span>
+
+                        <b>
+                            ↗
+                        </b>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    @else
+
+
+        {{-- =================================================
+             EMPTY STATE
+             ================================================= --}}
+
+        <div class="poetry-empty">
+
+            <div class="empty-number">
+                00
+            </div>
+
+            <h3>
+                لا توجد قصائد حالياً
+            </h3>
+
+            <p>
+                ستظهر القصائد هنا عند إضافتها.
+            </p>
+
+        </div>
+
+
+    @endif
+
+
+    {{-- =====================================================
+         ALL POEMS MODAL
+         ===================================================== --}}
+
+    @if($poems->count())
+
+        <div
+            class="poems-modal"
+            id="allPoemsModal"
+            aria-hidden="true"
+        >
+
+            <div class="modal-backdrop"></div>
+
+
+            <div class="modal-window">
+
+                {{-- -----------------------------------------
+                     MODAL HEADER
+                     ----------------------------------------- --}}
+
+                <div class="modal-header">
+
+                    <div class="modal-heading">
+
+                        <span>
+                            ARCHIVE
+                        </span>
+
+                        <h2>
+                            جميع القصائد
+                        </h2>
+
+                        <p>
+                            أرشيف النصوص والقصائد
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="modal-close"
+                        id="closeAllPoems"
+                        aria-label="إغلاق"
+                    >
+
+                        <span></span>
+                        <span></span>
+
+                    </button>
+
+                </div>
+
+
+                {{-- -----------------------------------------
+                     MODAL COUNT
+                     ----------------------------------------- --}}
+
+                <div class="modal-count">
+
+                    <strong>
+                        {{ str_pad(count($poems), 2, '0', STR_PAD_LEFT) }}
+                    </strong>
+
+                    <span>
+                        قصيدة
+                    </span>
+
+                </div>
+
+
+                {{-- -----------------------------------------
+                     ALL POEMS GRID
+                     ----------------------------------------- --}}
+
+                <div class="all-poems-grid">
+
+                    @foreach($poems as $index => $poem)
+
+                        @php
+
+                            $modalImage = $poem->image
+                                ? asset('storage/' . $poem->image)
+                                : asset('images/profile.png');
+
+                        @endphp
+
+
+                        <article class="archive-poem">
+
+                            {{-- الصورة --}}
+
+                            <div class="archive-image">
+
+                                <img
+                                    src="{{ $modalImage }}"
+                                    alt="{{ $poem->poem_title }}"
+                                    loading="lazy"
+                                >
+
+                                <div class="archive-image-number">
+
+                                    {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
+
+                                </div>
+
+                            </div>
+
+
+                            {{-- المعلومات --}}
+
+                            <div class="archive-body">
+
+                                <div class="archive-label">
+                                    قصيدة رقم
+                                    {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
+                                </div>
+
+
+                                <h3>
+                                    {{ $poem->poem_title }}
+                                </h3>
+
+
+                                <div class="archive-divider"></div>
+
+
+                                <div class="archive-content">
+
+                                    {!! nl2br(e($poem->poem_content)) !!}
+
+                                </div>
+
+
+                                @if(!empty($poem->poem_link))
+
+                                    <a
+                                        href="{{ $poem->poem_link }}"
+                                        class="archive-link"
+                                    >
+
+                                        <span>
+                                            رابط القصيدة
+                                        </span>
+
+                                        <b>
+                                            ↗
+                                        </b>
+
+                                    </a>
+
+                                @endif
+
+                            </div>
+
+                        </article>
+
+                    @endforeach
+
+                </div>
+
+            </div>
+
+        </div>
+
+    @endif
+
 </section>
 
 
-<!-- ==============================================================
-     JAVASCRIPT
-     ============================================================== -->
 
-<script>
+<style>
 
-function switchPoem(element) {
+/* =========================================================
+   CINEMATIC POETRY
+   ========================================================= */
 
-    if (element.classList.contains('active')) {
-        return;
-    }
+.cinematic-poetry {
 
+    --black: #101010;
 
-    /* إزالة التحديد السابق */
+    --paper: #f5f1e9;
 
-    document
-        .querySelectorAll('.poem-nav-item')
-        .forEach(item => {
+    --paper-dark: #e8e1d5;
 
-            item.classList.remove('active');
+    --text: #171717;
 
-        });
+    --muted: #777168;
 
+    --accent: #9d7650;
 
-    /* تحديد القصيدة الحالية */
+    position: relative;
 
-    element.classList.add('active');
+    width: 100%;
 
+    margin: 0 auto;
 
-    /* قراءة البيانات */
+    padding: 70px 5vw 90px;
 
-    const newTitle =
-        element.getAttribute('data-title');
+    background: var(--paper);
 
-    const newContent =
-        element.getAttribute('data-content');
+    color: var(--text);
 
-    const newImage =
-        element.getAttribute('data-image');
+    overflow: hidden;
 
-    const newLink =
-        element.getAttribute('data-link');
+    direction: rtl;
 
-
-    const displayArea =
-        document.getElementById(
-            'poemDisplayArea'
-        );
-
-
-    /* Animation */
-
-    displayArea.classList.remove(
-        'anim-slide-up'
-    );
-
-    displayArea.classList.add(
-        'anim-fade-out'
-    );
-
-
-    /* تغيير البيانات */
-
-    setTimeout(() => {
-
-        document.getElementById(
-            'poemTitle'
-        ).textContent = newTitle;
-
-
-        document.getElementById(
-            'poemContent'
-        ).textContent = newContent;
-
-
-        document.getElementById(
-            'poemImg'
-        ).src = newImage;
-
-
-        const linkBtn =
-            document.getElementById(
-                'poemLink'
-            );
-
-
-        if (
-            newLink &&
-            newLink.trim() !== ''
-        ) {
-
-            linkBtn.href = newLink;
-
-            linkBtn.style.display =
-                'inline-flex';
-
-        } else {
-
-            linkBtn.style.display =
-                'none';
-        }
-
-
-        displayArea.classList.remove(
-            'anim-fade-out'
-        );
-
-        displayArea.classList.add(
-            'anim-slide-up'
-        );
-
-    }, 380);
+    font-family:
+        "Cairo",
+        "Noto Sans Arabic",
+        Arial,
+        sans-serif;
 
 }
 
-</script>
 
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.poetry-header {
+
+    width: 100%;
+
+    max-width: 1450px;
+
+    margin: 0 auto 35px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 2fr auto;
+
+    align-items: end;
+
+    gap: 40px;
+
+}
+
+
+.header-meta {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: #111;
+
+    font-size: 19px;
+
+    font-weight: 900;
+
+    white-space: nowrap;
+
+}
+
+
+.meta-line {
+
+    width: 45px;
+
+    height: 2px;
+
+    background: var(--accent);
+
+}
+
+
+.header-main h2 {
+
+    margin: 0;
+
+    font-size: clamp(45px, 6vw, 92px);
+
+    line-height: .95;
+
+    letter-spacing: -3px;
+
+    font-weight: 900;
+
+}
+
+
+.header-main h2 span {
+
+    color: var(--accent);
+
+    display: inline-block;
+
+}
+
+
+.header-main p {
+
+    margin: 22px 0 0;
+
+    max-width: 650px;
+
+    color: #101010;
+
+    font-size: 18px;
+
+    line-height: 1.9;
+
+    font-weight: 900;
+
+}
+
+
+.poetry-counter {
+
+    font-size: xxx-large;
+
+    direction: ltr;
+
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 8px;
+
+    font-family: Arial, sans-serif;
+
+    color: var(--muted);
+
+}
+
+
+.poetry-counter strong {
+
+    color: var(--black);
+
+    font-size: 55px;
+
+    line-height: 1;
+
+    font-weight: 900;
+
+}
+
+
+/* =========================================================
+   ALL POEMS BUTTON
+   ========================================================= */
+
+.all-poems-action {
+
+    width: 100%;
+
+    max-width: 1450px;
+
+    margin: 0 auto 30px;
+
+    display: flex;
+
+    justify-content: flex-start;
+
+}
+
+
+.all-poems-button {
+
+    appearance: none;
+
+    border: 1px solid #1a1a1a;
+
+    background: #101010;
+
+    color: #fff;
+
+    min-height: 58px;
+
+    padding: 0 22px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 18px;
+
+    font-weight: 900;
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease,
+        box-shadow .25s ease;
+
+}
+
+
+.all-poems-button:hover {
+
+    background: var(--accent);
+
+    border-color: var(--accent);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(0,0,0,.12);
+
+}
+
+
+.all-poems-button b {
+
+    font-family: Arial, sans-serif;
+
+    font-size: 22px;
+
+    font-weight: 400;
+
+}
+
+
+.all-poems-icon {
+
+    width: 22px;
+
+    height: 22px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 4px;
+
+}
+
+
+.all-poems-icon i {
+
+    display: block;
+
+    width: 18px;
+
+    height: 2px;
+
+    background: #fff;
+
+}
+
+
+.all-poems-icon i:nth-child(2) {
+
+    width: 13px;
+
+}
+
+
+.all-poems-icon i:nth-child(3) {
+
+    width: 8px;
+
+}
+
+
+/* =========================================================
+   GALLERY
+   ========================================================= */
+
+.poetry-gallery-wrapper {
+
+    width: 100%;
+
+    max-width: 1500px;
+
+    margin: auto;
+
+    overflow: hidden;
+
+}
+
+
+.gallery-track {
+
+    display: flex;
+
+    gap: 24px;
+
+    overflow-x: auto;
+
+    padding: 10px 5px 35px;
+
+    scroll-behavior: smooth;
+
+    scroll-snap-type: x mandatory;
+
+    scrollbar-width: none;
+
+}
+
+
+.gallery-track::-webkit-scrollbar {
+
+    display: none;
+
+}
+
+
+.poem-slide {
+
+    position: relative;
+
+    flex: 0 0 260px;
+
+    height: 370px;
+
+    scroll-snap-align: center;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    background: #222;
+
+    transition:
+        flex-basis .45s ease,
+        transform .45s ease;
+
+}
+
+
+.poem-slide.active {
+
+    flex-basis: 430px;
+
+}
+
+
+.slide-image {
+
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+
+}
+
+
+.slide-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    filter: grayscale(35%);
+
+    transition:
+        transform .7s ease,
+        filter .7s ease;
+
+}
+
+
+.poem-slide:hover .slide-image img,
+.poem-slide.active .slide-image img {
+
+    transform: scale(1.045);
+
+    filter: grayscale(0);
+
+}
+
+
+.image-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,.88),
+            rgba(0,0,0,.05) 70%
+        );
+
+}
+
+
+.image-label {
+
+    position: absolute;
+
+    top: 20px;
+
+    right: 20px;
+
+    padding: 7px 13px;
+
+    background: rgba(255,255,255,.92);
+
+    color: #111;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+}
+
+
+.slide-number {
+
+    position: absolute;
+
+    z-index: 3;
+
+    top: 18px;
+
+    left: 20px;
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+}
+
+
+.slide-title {
+
+    position: absolute;
+
+    z-index: 3;
+
+    right: 25px;
+
+    left: 25px;
+
+    bottom: 25px;
+
+    color: white;
+
+    font-family:
+        "Amiri",
+        "Noto Serif Arabic",
+        serif;
+
+    font-size: 28px;
+
+    line-height: 1.35;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.gallery-navigation {
+
+    width: 100%;
+
+    max-width: 1450px;
+
+    margin: 25px auto 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+
+}
+
+
+.gallery-btn {
+
+    border: 0;
+
+    background: transparent;
+
+    color: var(--text);
+
+    cursor: pointer;
+
+    min-height: 52px;
+
+    padding: 10px 4px;
+
+    font-size: 52px;
+
+    font-weight: 800;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    transition: color .2s ease;
+
+}
+
+
+.gallery-btn:hover {
+
+    color: var(--accent);
+
+}
+
+
+.gallery-btn span {
+
+    font-family: Arial, sans-serif;
+
+    font-size: 22px;
+
+}
+
+
+.progress-container {
+
+    flex: 1;
+
+}
+
+
+.progress-track {
+
+    width: 100%;
+
+    height: 3px;
+
+    background: #d5cec3;
+
+    overflow: hidden;
+
+}
+
+
+.progress-bar {
+
+    width: 0;
+
+    height: 100%;
+
+    background: var(--black);
+
+    transition: width .4s ease;
+
+}
+
+
+/* =========================================================
+   SELECTED POEM
+   ========================================================= */
+
+.selected-poem {
+
+    max-width: 1450px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: 150px 1fr;
+
+    gap: 65px;
+
+    border-top: 1px solid #d5cec3;
+
+    padding-top: 55px;
+
+}
+
+
+.selected-index {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    color: var(--muted);
+
+}
+
+
+.selected-index span {
+
+    font-size: 54px;
+
+    font-weight: 800;
+
+}
+
+
+.selected-index strong {
+
+    font-family: Arial, sans-serif;
+
+    font-size: 65px;
+
+    line-height: 1;
+
+    color: var(--accent);
+
+}
+
+
+.selected-content {
+
+    max-width: 1050px;
+
+}
+
+
+.eyebrow {
+
+    display: block;
+
+    margin-bottom: 15px;
+
+    color: var(--accent);
+
+    font-size: 2pc;
+
+    font-weight: 900;
+
+}
+
+
+.selected-heading h1 {
+
+    margin: 0;
+
+    font-family:
+        "Amiri",
+        "Noto Serif Arabic",
+        serif;
+
+    font-size: clamp(40px, 5vw, 78px);
+
+    line-height: 1.15;
+
+    font-weight: 700;
+
+}
+
+
+.poem-divider {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin: 35px 0;
+
+}
+
+
+.poem-divider span {
+
+    width: 45px;
+
+    height: 1px;
+
+    background: #bdb4a7;
+
+}
+
+
+.poem-divider i {
+
+    width: 8px;
+
+    height: 8px;
+
+    background: var(--accent);
+
+    transform: rotate(45deg);
+
+}
+
+
+.poem-text {
+
+    max-width: 902px;
+
+    color: #37332e;
+
+    font-family:
+        "Amiri",
+        "Noto Serif Arabic",
+        serif;
+
+    font-size: clamp(36px, 3.5vw, 75px);
+
+    line-height: 2.15;
+
+    white-space: normal;
+
+    font-weight: 900;
+
+}
+
+
+.selected-footer {
+
+    margin-top: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    border-top: 1px solid #d5cec3;
+
+    padding-top: 25px;
+
+}
+
+
+.read-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    min-height: 56px;
+
+    padding: 0 25px;
+
+    background: var(--black);
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 22px;
+
+    font-weight: 800;
+
+    transition:
+        transform .25s ease,
+        background .25s ease;
+
+}
+
+
+.read-button:hover {
+
+    transform: translateY(-3px);
+
+    background: var(--accent);
+
+}
+
+
+.read-button b {
+
+    font-size: 21px;
+
+    font-family: Arial, sans-serif;
+
+}
+
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.poetry-empty {
+
+    min-height: 400px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    text-align: center;
+
+}
+
+
+.empty-number {
+
+    font-family: Arial, sans-serif;
+
+    font-size: 100px;
+
+    font-weight: 900;
+
+    color: #ddd5ca;
+
+}
+
+
+.poetry-empty h3 {
+
+    margin: 10px 0;
+
+    font-size: 28px;
+
+}
+
+
+.poetry-empty p {
+
+    color: var(--muted);
+
+    font-size: 16px;
+
+}
+
+
+/* =========================================================
+   =========================================================
+   ALL POEMS MODAL
+   =========================================================
+   ========================================================= */
+
+.poems-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+    visibility: hidden;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity .3s ease,
+        visibility .3s ease;
+
+}
+
+
+.poems-modal.open {
+
+    visibility: visible;
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+}
+
+
+.modal-backdrop {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(12,12,12,.78);
+
+    backdrop-filter:
+        blur(8px);
+
+    -webkit-backdrop-filter:
+        blur(8px);
+
+}
+
+
+.modal-window {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: min(1450px, 100%);
+
+    max-height: 92vh;
+
+    overflow-y: auto;
+
+    background: #f7f3ec;
+
+    border: 1px solid rgba(255,255,255,.2);
+
+    box-shadow:
+        0 35px 90px rgba(0,0,0,.4);
+
+    padding: 45px;
+
+    direction: rtl;
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        var(--accent)
+        #ddd5ca;
+
+    transform:
+        translateY(20px)
+        scale(.98);
+
+    transition:
+        transform .35s ease;
+
+}
+
+
+.poems-modal.open .modal-window {
+
+    transform:
+        translateY(0)
+        scale(1);
+
+}
+
+
+/* =========================================================
+   MODAL HEADER
+   ========================================================= */
+
+.modal-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    border-bottom: 1px solid #d7d0c6;
+
+    padding-bottom: 30px;
+
+}
+
+
+.modal-heading span {
+
+    display: block;
+
+    direction: ltr;
+
+    font-family: Arial, sans-serif;
+
+    color: var(--accent);
+
+    font-size: 13px;
+
+    letter-spacing: 4px;
+
+    font-weight: 900;
+
+}
+
+
+.modal-heading h2 {
+
+    margin: 8px 0 0;
+
+    font-size: clamp(38px, 5vw, 65px);
+
+    line-height: 1.1;
+
+    font-weight: 900;
+
+    color: #111;
+
+}
+
+
+.modal-heading p {
+
+    margin-top: 10px;
+
+    color: #716b63;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   CLOSE
+   ========================================================= */
+
+.modal-close {
+
+    position: relative;
+
+    flex: 0 0 auto;
+
+    width: 58px;
+
+    height: 58px;
+
+    border: 1px solid #bdb5aa;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    transition:
+        background .25s ease,
+        border-color .25s ease;
+
+}
+
+
+.modal-close:hover {
+
+    background: #111;
+
+    border-color: #111;
+
+}
+
+
+.modal-close span {
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    width: 25px;
+
+    height: 2px;
+
+    background: #111;
+
+    transition: background .25s ease;
+
+}
+
+
+.modal-close:hover span {
+
+    background: white;
+
+}
+
+
+.modal-close span:first-child {
+
+    transform:
+        translate(-50%, -50%)
+        rotate(45deg);
+
+}
+
+
+.modal-close span:last-child {
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-45deg);
+
+}
+
+
+/* =========================================================
+   MODAL COUNT
+   ========================================================= */
+
+.modal-count {
+
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 10px;
+
+    margin: 25px 0;
+
+}
+
+
+.modal-count strong {
+
+    font-family: Arial, sans-serif;
+
+    color: var(--accent);
+
+    font-size: 35px;
+
+    font-weight: 900;
+
+}
+
+
+.modal-count span {
+
+    color: #686158;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+}
+
+
+/* =========================================================
+   ARCHIVE GRID
+   ========================================================= */
+
+.all-poems-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 25px;
+
+}
+
+
+.archive-poem {
+
+    background: #fff;
+
+    border: 1px solid #ded7cc;
+
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
+
+}
+
+
+.archive-poem:hover {
+
+    transform: translateY(-6px);
+
+    border-color: #c7b49f;
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.10);
+
+}
+
+
+/* =========================================================
+   ARCHIVE IMAGE
+   ========================================================= */
+
+.archive-image {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 270px;
+
+    overflow: hidden;
+
+    background: #ddd;
+
+}
+
+
+.archive-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform .5s ease;
+
+}
+
+
+.archive-poem:hover .archive-image img {
+
+    transform: scale(1.035);
+
+}
+
+
+.archive-image-number {
+
+    position: absolute;
+
+    top: 15px;
+
+    left: 15px;
+
+    width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(255,255,255,.94);
+
+    color: #111;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 15px;
+
+    font-weight: 900;
+
+}
+
+
+/* =========================================================
+   ARCHIVE BODY
+   ========================================================= */
+
+.archive-body {
+
+    padding: 28px;
+
+}
+
+
+.archive-label {
+
+    color: var(--accent);
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    margin-bottom: 12px;
+
+}
+
+
+.archive-body h3 {
+
+    margin: 0;
+
+    color: #111;
+
+    font-family:
+        "Amiri",
+        "Noto Serif Arabic",
+        serif;
+
+    font-size: 32px;
+
+    line-height: 1.3;
+
+    font-weight: 700;
+
+}
+
+
+.archive-divider {
+
+    width: 55px;
+
+    height: 2px;
+
+    background: var(--accent);
+
+    margin: 22px 0;
+
+}
+
+
+.archive-content {
+
+    color: #3e3933;
+
+    font-family:
+        "Amiri",
+        "Noto Serif Arabic",
+        serif;
+
+    font-size: 19px;
+
+    line-height: 2;
+
+    font-weight: 600;
+
+    max-height: 390px;
+
+    overflow-y: auto;
+
+    padding-left: 8px;
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        #c5b39f
+        transparent;
+
+}
+
+
+.archive-content::-webkit-scrollbar {
+
+    width: 4px;
+
+}
+
+
+.archive-content::-webkit-scrollbar-thumb {
+
+    background: #c5b39f;
+
+}
+
+
+/* =========================================================
+   ARCHIVE LINK
+   ========================================================= */
+
+.archive-link {
+
+    margin-top: 25px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid #e3ddd4;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    color: #111;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    font-weight: 900;
+
+    transition: color .2s ease;
+
+}
+
+
+.archive-link:hover {
+
+    color: var(--accent);
+
+}
+
+
+.archive-link b {
+
+    font-family: Arial, sans-serif;
+
+    font-size: 21px;
+
+}
+
+
+/* =========================================================
+   LAPTOP
+   ========================================================= */
+
+@media (min-width: 901px) and (max-width: 1250px) {
+
+    .cinematic-poetry {
+
+        padding-left: 35px;
+
+        padding-right: 35px;
+
+    }
+
+
+    .poetry-header {
+
+        grid-template-columns:
+            180px
+            minmax(0, 1fr)
+            120px;
+
+        gap: 25px;
+
+    }
+
+
+    .header-main h2 {
+
+        font-size: 65px;
+
+    }
+
+
+    .header-main p {
+
+        font-size: 18px;
+
+    }
+
+
+    .poem-slide {
+
+        flex-basis: 220px;
+
+        height: 340px;
+
+    }
+
+
+    .poem-slide.active {
+
+        flex-basis: 360px;
+
+    }
+
+
+    .selected-poem {
+
+        grid-template-columns: 120px minmax(0, 1fr);
+
+        gap: 35px;
+
+    }
+
+
+    .selected-content {
+
+        max-width: 900px;
+
+    }
+
+
+    .all-poems-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+
+    .modal-window {
+
+        padding: 35px;
+
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .cinematic-poetry {
+
+        padding:
+            55px 25px
+            70px;
+
+    }
+
+
+    .poetry-header {
+
+        grid-template-columns:
+            1fr auto;
+
+        gap: 25px;
+
+    }
+
+
+    .header-meta {
+
+        grid-column:
+            1 / -1;
+
+    }
+
+
+    .poetry-counter {
+
+        align-self: center;
+
+    }
+
+
+    .poem-slide {
+
+        flex-basis: 230px;
+
+        height: 330px;
+
+    }
+
+
+    .poem-slide.active {
+
+        flex-basis: 350px;
+
+    }
+
+
+    .selected-poem {
+
+        grid-template-columns:
+            100px 1fr;
+
+        gap: 35px;
+
+    }
+
+
+    .all-poems-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+
+    .modal-window {
+
+        padding: 30px;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .cinematic-poetry {
+
+        margin: 35px 0;
+
+        padding:
+            45px 15px
+            55px;
+
+    }
+
+
+    /* HEADER */
+
+    .poetry-header {
+
+        display: block;
+
+        margin-bottom: 25px;
+
+    }
+
+
+    .header-meta {
+
+        margin-bottom: 25px;
+
+        font-size: 19px;
+
+    }
+
+
+    .meta-line {
+
+        width: 30px;
+
+    }
+
+
+    .header-main h2 {
+
+        font-size:
+            clamp(48px, 15vw, 70px);
+
+        letter-spacing: -2px;
+
+    }
+
+
+    .header-main p {
+
+        margin-top: 18px;
+
+        font-size: 15px;
+
+        line-height: 1.8;
+
+    }
+
+
+    .poetry-counter {
+
+        margin-top: 25px;
+
+        justify-content: flex-start;
+
+    }
+
+
+    .poetry-counter strong {
+
+        font-size: 48px;
+
+    }
+
+
+    /* ALL BUTTON */
+
+    .all-poems-action {
+
+        margin-bottom: 25px;
+
+    }
+
+
+    .all-poems-button {
+
+        width: 100%;
+
+        min-height: 60px;
+
+        font-size: 18px;
+
+    }
+
+
+    /* GALLERY */
+
+    .gallery-track {
+
+        gap: 14px;
+
+        padding:
+            5px 5px
+            25px;
+
+        margin-right: -5px;
+
+    }
+
+
+    .poem-slide,
+    .poem-slide.active {
+
+        flex:
+            0 0 84vw;
+
+        width: 84vw;
+
+        height: 390px;
+
+        scroll-snap-align: center;
+
+    }
+
+
+    .slide-number {
+
+        top: 18px;
+
+        left: 18px;
+
+        font-size: 18px;
+
+    }
+
+
+    .image-label {
+
+        top: 18px;
+
+        right: 18px;
+
+        padding:
+            8px 12px;
+
+        font-size: 12px;
+
+    }
+
+
+    .slide-title {
+
+        right: 22px;
+
+        left: 22px;
+
+        bottom: 22px;
+
+        font-size: 30px;
+
+        line-height: 1.35;
+
+    }
+
+
+    /* NAVIGATION */
+
+    .gallery-navigation {
+
+        margin:
+            5px auto
+            45px;
+
+        gap: 12px;
+
+    }
+
+
+    .gallery-btn {
+
+        min-height: 54px;
+
+        font-size: 13px;
+
+        white-space: nowrap;
+
+    }
+
+
+    .gallery-btn span {
+
+        font-size: 18px;
+
+    }
+
+
+    .progress-container {
+
+        min-width: 50px;
+
+    }
+
+
+    /* SELECTED */
+
+    .selected-poem {
+
+        display: block;
+
+        padding-top: 35px;
+
+    }
+
+
+    .selected-index {
+
+        flex-direction: row;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        margin-bottom: 25px;
+
+    }
+
+
+    .selected-index span {
+
+        font-size: 14px;
+
+    }
+
+
+    .selected-index strong {
+
+        font-size: 48px;
+
+    }
+
+
+    .eyebrow {
+
+        font-size: 31px;
+
+        margin-bottom: 12px;
+
+    }
+
+
+    .selected-heading h1 {
+
+        font-size:
+            clamp(38px, 12vw, 55px);
+
+        line-height: 1.2;
+
+    }
+
+
+    .poem-divider {
+
+        margin: 28px 0;
+
+    }
+
+
+    .poem-text {
+
+        font-size: 23px;
+
+        line-height: 2.05;
+
+    }
+
+
+    .selected-footer {
+
+        margin-top: 40px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 22px;
+
+    }
+
+
+    .read-button {
+
+        width: 100%;
+
+        min-height: 60px;
+
+        font-size: 16px;
+
+    }
+
+
+    /* =====================================================
+       MODAL MOBILE
+       ===================================================== */
+
+    .poems-modal {
+
+        padding: 8px;
+
+    }
+
+
+    .modal-window {
+
+        width: 100%;
+
+        max-height: 96vh;
+
+        padding:
+            25px 15px
+            30px;
+
+    }
+
+
+    .modal-header {
+
+        padding-bottom: 22px;
+
+    }
+
+
+    .modal-heading span {
+
+        font-size: 11px;
+
+        letter-spacing: 3px;
+
+    }
+
+
+    .modal-heading h2 {
+
+        font-size: 42px;
+
+    }
+
+
+    .modal-heading p {
+
+        font-size: 15px;
+
+    }
+
+
+    .modal-close {
+
+        width: 48px;
+
+        height: 48px;
+
+    }
+
+
+    .modal-count {
+
+        margin: 20px 0;
+
+    }
+
+
+    .modal-count strong {
+
+        font-size: 30px;
+
+    }
+
+
+    .modal-count span {
+
+        font-size: 15px;
+
+    }
+
+
+    .all-poems-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 22px;
+
+    }
+
+
+    .archive-image {
+
+        height: 280px;
+
+    }
+
+
+    .archive-body {
+
+        padding: 24px 20px 28px;
+
+    }
+
+
+    .archive-label {
+
+        font-size: 14px;
+
+    }
+
+
+    .archive-body h3 {
+
+        font-size: 32px;
+
+    }
+
+
+    .archive-content {
+
+        font-size: 21px;
+
+        line-height: 2;
+
+        max-height: 450px;
+
+    }
+
+
+    .archive-link {
+
+        min-height: 50px;
+
+        font-size: 17px;
+
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .cinematic-poetry {
+
+        padding-left: 12px;
+
+        padding-right: 12px;
+
+    }
+
+
+    .poem-slide,
+    .poem-slide.active {
+
+        flex-basis: 88vw;
+
+        width: 88vw;
+
+        height: 360px;
+
+    }
+
+
+    .slide-title {
+
+        font-size: 27px;
+
+    }
+
+
+    .poem-text {
+
+        font-size: 21px;
+
+        line-height: 2;
+
+    }
+
+
+    .modal-heading h2 {
+
+        font-size: 36px;
+
+    }
+
+
+    .archive-image {
+
+        height: 240px;
+
+    }
+
+
+    .archive-body h3 {
+
+        font-size: 29px;
+
+    }
+
+
+    .archive-content {
+
+        font-size: 20px;
+
+    }
+
+}
+
+
+/* =========================================================
+   PREVENT BODY SCROLL WHEN MODAL OPEN
+   ========================================================= */
+
+body.poems-modal-open {
+
+    overflow: hidden;
+
+}
+
+</style>
+
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+
+    /* =====================================================
+       MAIN POETRY GALLERY
+       ===================================================== */
+
+    const slides = Array.from(
+        document.querySelectorAll('.poem-slide')
+    );
+
+
+    if (slides.length) {
+
+        const track =
+            document.getElementById('poetryTrack');
+
+        const title =
+            document.getElementById('poemTitle');
+
+        const content =
+            document.getElementById('poemContent');
+
+        const link =
+            document.getElementById('poemLink');
+
+        const currentNumber =
+            document.getElementById('currentNumber');
+
+        const detailNumber =
+            document.getElementById('detailNumber');
+
+        const progress =
+            document.getElementById('poetryProgress');
+
+        const prevButton =
+            document.getElementById('prevPoem');
+
+        const nextButton =
+            document.getElementById('nextPoem');
+
+
+        let currentIndex = 0;
+
+
+        function updatePoem(index, scroll = true) {
+
+
+            if (index < 0) {
+
+                index =
+                    slides.length - 1;
+
+            }
+
+
+            if (index >= slides.length) {
+
+                index = 0;
+
+            }
+
+
+            currentIndex = index;
+
+
+            const slide =
+                slides[index];
+
+
+            slides.forEach(item => {
+
+                item.classList.remove('active');
+
+            });
+
+
+            slide.classList.add('active');
+
+
+            /* -----------------------------------------
+               TITLE
+               ----------------------------------------- */
+
+            title.textContent =
+                slide.dataset.title || '';
+
+
+            /* -----------------------------------------
+               CONTENT
+               ----------------------------------------- */
+
+            content.innerHTML =
+                (slide.dataset.content || '')
+                    .replace(/\n/g, '<br>');
+
+
+            /* -----------------------------------------
+               NUMBER
+               ----------------------------------------- */
+
+            const number =
+                String(index + 1)
+                    .padStart(2, '0');
+
+
+            currentNumber.textContent =
+                number;
+
+
+            detailNumber.textContent =
+                number;
+
+
+            /* -----------------------------------------
+               PROGRESS
+               ----------------------------------------- */
+
+            const percentage =
+                ((index + 1) /
+                    slides.length) * 100;
+
+
+            progress.style.width =
+                percentage + '%';
+
+
+            /* -----------------------------------------
+               LINK
+               ----------------------------------------- */
+
+            const poemLink =
+                slide.dataset.link || '';
+
+
+            if (poemLink.trim() !== '') {
+
+                link.href =
+                    poemLink;
+
+                link.style.display =
+                    'inline-flex';
+
+            } else {
+
+                link.style.display =
+                    'none';
+
+            }
+
+
+            /* -----------------------------------------
+               SCROLL
+               ----------------------------------------- */
+
+            if (scroll) {
+
+                slide.scrollIntoView({
+
+                    behavior: 'smooth',
+
+                    block: 'nearest',
+
+                    inline: 'center'
+
+                });
+
+            }
+
+        }
+
+
+        /* =================================================
+           CLICK SLIDE
+           ================================================= */
+
+        slides.forEach(
+            (slide, index) => {
+
+                slide.addEventListener(
+                    'click',
+                    function () {
+
+                        updatePoem(index);
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =================================================
+           PREVIOUS
+           ================================================= */
+
+        if (prevButton) {
+
+            prevButton.addEventListener(
+                'click',
+                function () {
+
+                    updatePoem(
+                        currentIndex - 1
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =================================================
+           NEXT
+           ================================================= */
+
+        if (nextButton) {
+
+            nextButton.addEventListener(
+                'click',
+                function () {
+
+                    updatePoem(
+                        currentIndex + 1
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =================================================
+           SWIPE / SCROLL
+           ================================================= */
+
+        let scrollTimer;
+
+
+        track.addEventListener(
+            'scroll',
+            function () {
+
+                clearTimeout(
+                    scrollTimer
+                );
+
+
+                scrollTimer =
+                    setTimeout(
+                        function () {
+
+                            const center =
+                                track.scrollLeft +
+                                (
+                                    track.offsetWidth /
+                                    2
+                                );
+
+
+                            let closestIndex =
+                                0;
+
+
+                            let closestDistance =
+                                Infinity;
+
+
+                            slides.forEach(
+                                (slide, index) => {
+
+                                    const slideCenter =
+                                        slide.offsetLeft +
+                                        (
+                                            slide.offsetWidth /
+                                            2
+                                        );
+
+
+                                    const distance =
+                                        Math.abs(
+                                            center -
+                                            slideCenter
+                                        );
+
+
+                                    if (
+                                        distance <
+                                        closestDistance
+                                    ) {
+
+                                        closestDistance =
+                                            distance;
+
+                                        closestIndex =
+                                            index;
+
+                                    }
+
+                                }
+                            );
+
+
+                            if (
+                                closestIndex !==
+                                currentIndex
+                            ) {
+
+                                updatePoem(
+                                    closestIndex,
+                                    false
+                                );
+
+                            }
+
+                        },
+                        120
+                    );
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        /* =================================================
+           KEYBOARD
+           ================================================= */
+
+        document.addEventListener(
+            'keydown',
+            function (event) {
+
+
+                if (
+                    event.key ===
+                    'ArrowLeft'
+                ) {
+
+                    updatePoem(
+                        currentIndex + 1
+                    );
+
+                }
+
+
+                if (
+                    event.key ===
+                    'ArrowRight'
+                ) {
+
+                    updatePoem(
+                        currentIndex - 1
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           INITIAL
+           ================================================= */
+
+        updatePoem(
+            0,
+            false
+        );
+
+    }
+
+
+
+    /* =====================================================
+       ALL POEMS MODAL
+       ===================================================== */
+
+    const modal =
+        document.getElementById(
+            'allPoemsModal'
+        );
+
+
+    const openModal =
+        document.getElementById(
+            'openAllPoems'
+        );
+
+
+    const closeModal =
+        document.getElementById(
+            'closeAllPoems'
+        );
+
+
+    const backdrop =
+        modal
+            ? modal.querySelector(
+                '.modal-backdrop'
+            )
+            : null;
+
+
+    if (
+        modal &&
+        openModal &&
+        closeModal
+    ) {
+
+
+        /* -----------------------------------------------
+           OPEN
+           ----------------------------------------------- */
+
+        function openPoemsModal() {
+
+            modal.classList.add(
+                'open'
+            );
+
+            modal.setAttribute(
+                'aria-hidden',
+                'false'
+            );
+
+            document.body.classList.add(
+                'poems-modal-open'
+            );
+
+        }
+
+
+        /* -----------------------------------------------
+           CLOSE
+           ----------------------------------------------- */
+
+        function closePoemsModal() {
+
+            modal.classList.remove(
+                'open'
+            );
+
+            modal.setAttribute(
+                'aria-hidden',
+                'true'
+            );
+
+            document.body.classList.remove(
+                'poems-modal-open'
+            );
+
+        }
+
+
+        /* -----------------------------------------------
+           OPEN BUTTON
+           ----------------------------------------------- */
+
+        openModal.addEventListener(
+            'click',
+            openPoemsModal
+        );
+
+
+        /* -----------------------------------------------
+           CLOSE BUTTON
+           ----------------------------------------------- */
+
+        closeModal.addEventListener(
+            'click',
+            closePoemsModal
+        );
+
+
+        /* -----------------------------------------------
+           BACKDROP
+           ----------------------------------------------- */
+
+        if (backdrop) {
+
+            backdrop.addEventListener(
+                'click',
+                closePoemsModal
+            );
+
+        }
+
+
+        /* -----------------------------------------------
+           ESC KEY
+           ----------------------------------------------- */
+
+        document.addEventListener(
+            'keydown',
+            function (event) {
+
+                if (
+                    event.key === 'Escape' &&
+                    modal.classList.contains('open')
+                ) {
+
+                    closePoemsModal();
+
+                }
+
+            }
+        );
+
+    }
+
+});
+
+</script>

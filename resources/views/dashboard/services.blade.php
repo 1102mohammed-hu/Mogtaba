@@ -577,7 +577,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 title: 'تمت الإضافة بنجاح!',
                 text: data.message || 'تم نشر خدمتك الجديدة بنجاح!',
                 background: '#111827', color: '#f8fafc', confirmButtonColor: '#6366f1',
-                confirmButtonText: 'رائع جداً',
+                confirmButtonText: 'تم',
                 customClass: { popup: 'swal-dark-popup' }
             }).then(() => { location.reload(); });
         })

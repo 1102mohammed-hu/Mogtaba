@@ -1389,7 +1389,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 background: '#111827',
                 color: '#f8fafc',
                 confirmButtonColor: '#d946ef',
-                confirmButtonText: 'رائع جداً',
+                confirmButtonText: 'تم',
                 customClass: { popup: 'swal-dark-popup' }
             });
         })
