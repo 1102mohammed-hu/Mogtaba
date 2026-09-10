@@ -139,7 +139,7 @@
     font-size: 1.2rem;
     font-weight: 700;
     margin: 0;
-    color: var(--gold-light);
+    color: var(--gold-);
     letter-spacing: 0.5px;
 }
 
@@ -265,8 +265,9 @@
 /* CIRCULAR AUTHOR/POEM IMAGE WITH VINTAGE GOLD GLOW */
 .poem-avatar-wrapper {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 12pc;
+    height: 210px;
+
     margin-bottom: 32px;
 }
 
@@ -309,7 +310,7 @@
 /* POEM CONTENT / VERSES */
 .main-poem-content {
     font-family: var(--font-poetry);
-    font-size: 1.65rem;
+    font-size: 1.4rem;
     line-height: 2.3;
     color: var(--sepia-text);
     white-space: pre-line;
@@ -390,31 +391,429 @@
     50% { transform: translate(60px, 80px) scale(1.15); }
     100% { transform: translate(-40px, -50px) scale(0.95); }
 }
+/* ============================================================
+   📱 RESPONSIVE - MOBILE POETRY VIEW
+   القائمة بجانب القصيدة وليس فوقها
+   ============================================================ */
 
-/* RESPONSIVE LAYOUT */
 @media (max-width: 992px) {
-    .poems-container {
-        grid-template-columns: 1fr;
+
+    /* الصفحة نفسها */
+    .poems-section {
+        min-height: 100vh;
+        width: 100%;
+        padding: 70px 10px 20px;
+        margin: 0;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        overflow: hidden;
     }
-    
+
+    /* القائمة + القصيدة بجانب بعض */
+    .poems-container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        display: grid;
+
+        /* القائمة على اليمين - القصيدة على اليسار */
+        grid-template-columns: 105px minmax(0, 1fr);
+
+        gap: 10px;
+        align-items: start;
+    }
+
+    /* ========================================================
+       القائمة الجانبية
+       ======================================================== */
+
     .poems-sidebar {
         grid-column: 1;
-        position: static;
-        order: 1;
+        grid-row: 1;
+
+        width: 105px;
+        padding: 12px 7px;
+
+        position: sticky;
+        top: 70px;
+
+        border-radius: 16px;
+
+        max-height: calc(100vh - 90px);
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        scrollbar-width: thin;
     }
-    
+
+    /* عنوان قائمة القصائد */
+    .sidebar-header {
+        display: flex;
+        flex-direction: column;
+
+        justify-content: center;
+        align-items: center;
+
+        gap: 6px;
+
+        margin-bottom: 12px;
+        padding-bottom: 10px;
+
+        text-align: center;
+    }
+
+    .sidebar-header svg {
+        width: 19px;
+        height: 19px;
+    }
+
+    .sidebar-header h3 {
+           font-size: 0.72rem;
+        line-height: 3.5;
+        text-align: center;
+        letter-spacing: 0;
+               color: #d4af37;
+        font-family: 'system-ui';
+    }
+
+    /* قائمة العناوين */
+    .poems-list {
+        width: 100%;
+        gap: 7px;
+    }
+
+    .poem-nav-item {
+        width: 100%;
+        min-height: 55px;
+
+        padding: 8px 5px;
+
+        border-radius: 11px;
+
+        font-size: 0.70rem;
+        line-height: 1.5;
+color: white;
+        justify-content: center;
+    }
+
+    /* محتوى عنوان القصيدة */
+    .poem-item-content {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 5px;
+
+        text-align: center;
+    }
+
+    .poem-item-content span {
+        width: 100%;
+
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+
+        overflow: hidden;
+
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+
+    .poem-item-icon {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+    }
+
+    /* إخفاء السهم في الهاتف لتوفير المساحة */
+    .poem-nav-item .arrow-icon {
+        display: none;
+    }
+
+    /* ========================================================
+       بطاقة القصيدة
+       ======================================================== */
+
     .poem-display-card {
-        grid-column: 1;
-        order: 2;
-        padding: 40px 20px;
+        grid-column: 2;
+        grid-row: 1;
+
+        width: 100%;
+        min-width: 0;
+
+        min-height: calc(100vh - 110px);
+        max-height: calc(100vh - 110px);
+
+        padding: 25px 14px 30px;
+
+        border-radius: 18px;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        align-items: center;
+
+        scrollbar-width: thin;
     }
-    
+
+    /* منطقة عرض القصيدة */
+    .poem-view-wrapper {
+        width: 100%;
+        min-width: 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* ========================================================
+       صورة القصيدة
+       ======================================================== */
+
+    .poem-avatar-wrapper {
+         width: 141px;
+        height: 149px;
+        margin-bottom: 18px;
+
+        flex-shrink: 0;
+    }
+
+    /* ========================================================
+       عنوان القصيدة
+       ======================================================== */
+
     .main-poem-title {
-        font-size: 2.3rem;
+        width: 100%;
+
+        font-size: 1.65rem;
+        line-height: 1.45;
+
+        margin: 0 0 18px;
+
+        padding: 0 5px;
+
+        word-break: break-word;
+        overflow-wrap: anywhere;
     }
-    
+
+    /* ========================================================
+       نص القصيدة
+       ======================================================== */
+
     .main-poem-content {
-        font-size: 1.35rem;
+        width: 100%;
+
+        max-width: 100%;
+
+        font-size: 2.05rem;
+
+        /*
+         * هذا أهم تعديل:
+         * يجعل أبيات القصيدة قابلة للقراءة
+         * ولا تخرج من حدود الكرت
+         */
+        line-height: 2.1;
+
+        margin: 0 0 22px;
+
+        padding: 0 6px;
+
+        white-space: pre-line;
+
+        word-break: normal;
+        overflow-wrap: anywhere;
+
+        text-align: center;
+    }
+
+    /* ========================================================
+       زر الاستماع / القراءة
+       ======================================================== */
+
+    .poem-action-btn {
+        width: 100%;
+        max-width: 220px;
+
+        padding: 11px 14px;
+
+        font-size: 0.78rem;
+
+        gap: 7px;
+
+        justify-content: center;
+
+        flex-shrink: 0;
+    }
+
+    .poem-action-btn svg {
+        width: 17px;
+        height: 17px;
+    }
+}
+
+
+/* ============================================================
+   📱 هواتف صغيرة
+   ============================================================ */
+
+@media (max-width: 430px) {
+
+    .poems-section {
+        padding: 68px 7px 12px;
+    }
+
+    .poems-container {
+
+        /*
+         * القائمة صغيرة ولكنها تبقى على الجانب
+         */
+        grid-template-columns: 92px minmax(0, 1fr);
+
+        gap: 8px;
+    }
+
+    /* القائمة */
+    .poems-sidebar {
+        width: 92px;
+
+        padding: 10px 5px;
+
+        top: 68px;
+
+        max-height: calc(100vh - 80px);
+
+        border-radius: 14px;
+    }
+
+    .sidebar-header {
+        margin-bottom: 10px;
+        padding-bottom: 8px;
+    }
+
+    .sidebar-header svg {
+        width: 17px;
+        height: 17px;
+    }
+
+    .sidebar-header h3 {
+        font-size: 0.65rem;
+    }
+
+    .poem-nav-item {
+        min-height: 52px;
+
+        padding: 7px 4px;
+
+        font-size: 0.64rem;
+
+        border-radius: 9px;
+    }
+
+    .poem-item-content {
+        gap: 4px;
+    }
+
+    .poem-item-icon {
+        width: 14px;
+        height: 14px;
+    }
+
+    .poem-item-content span {
+        -webkit-line-clamp: 3;
+    }
+
+    /* بطاقة القصيدة */
+    .poem-display-card {
+        min-height: calc(100vh - 100px);
+        max-height: calc(100vh - 100px);
+
+        padding: 22px 11px 25px;
+
+        border-radius: 16px;
+    }
+
+    /* الصورة */
+    .poem-avatar-wrapper {
+        width: 82px;
+        height: 82px;
+
+        margin-bottom: 15px;
+    }
+
+    /* العنوان */
+    .main-poem-title {
+        font-size: 3.65rem;
+        line-height: 1.45;
+
+        margin-bottom: 15px;
+    }
+
+    /* النص */
+    .main-poem-content {
+        font-size: 0.95rem;
+        line-height: 2;
+
+        padding: 0 3px;
+    }
+
+    /* الزر */
+    .poem-action-btn {
+        max-width: 190px;
+
+        padding: 10px 10px;
+
+        font-size: 0.70rem;
+    }
+}
+
+
+/* ============================================================
+   📱 أجهزة بعرض 360px أو أقل
+   ============================================================ */
+
+@media (max-width: 360px) {
+
+    .poems-section {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .poems-container {
+        grid-template-columns: 82px minmax(0, 1fr);
+        gap: 6px;
+    }
+
+    .poems-sidebar {
+        width: 82px;
+    }
+
+    .poem-nav-item {
+        font-size: 0.58rem;
+        min-height: 50px;
+    }
+
+    .poem-display-card {
+        padding: 20px 8px 22px;
+    }
+
+    .poem-avatar-wrapper {
+             width: 168px;
+        height: 170px;
+    }
+
+    .main-poem-title {
+        font-size: 1.2rem;
+    }
+
+    .main-poem-content {
+        font-size: 0.88rem;
+        line-height: 1.9;
     }
 }
 </style>

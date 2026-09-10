@@ -569,6 +569,336 @@
     .btn-cancel { background: rgba(255,255,255,0.05); color: white; padding: 14px; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-weight: 700; cursor: pointer; flex: 1; font-family: 'Cairo'; }
 
     .swal-dark-popup { border: 1px solid rgba(217, 70, 239, 0.2) !important; font-family: 'Cairo', sans-serif !important; border-radius: 20px !important; }
+
+    /* =========================================================
+   📱 RESPONSIVE MOBILE FIX - صفحة الديوان الشعري
+   ========================================================= */
+
+/* منع أي عنصر من تجاوز عرض الشاشة */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* الحاوية الرئيسية */
+.poems-container {
+    width: 100%;
+    max-width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    padding: 10px 16px 30px;
+}
+
+/* =========================================================
+   📱 الأجهزة اللوحية والهواتف
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .poems-container {
+        width: 100%;
+        margin: 0;
+        padding: 85px 14px 25px;
+    }
+
+    /* الهيدر */
+    .poems-header {
+        width: 100%;
+        padding: 18px 16px;
+        margin-bottom: 55px;
+
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+
+        border-radius: 16px;
+    }
+
+    .poems-header h2 {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        text-align: center;
+    }
+
+    .btn-add-poem {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 16px;
+    }
+
+    /* شبكة القصائد */
+    .poems-grid {
+        width: 100%;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 65px;
+    }
+
+    /* الكرت */
+    .poem-card {
+        width: 100%;
+        min-width: 0;
+        padding-top: 60px;
+        border-radius: 20px;
+    }
+
+    .poem-body {
+        width: 100%;
+        min-width: 0;
+        padding: 22px 16px 18px;
+    }
+
+    .poem-body h3 {
+        font-size: 1.15rem;
+        line-height: 1.7;
+    }
+
+    /* صورة القصيدة */
+    .poem-circle-frame {
+        width: 88px;
+        height: 88px;
+    }
+
+    .poem-avatar-container {
+        top: -42px;
+    }
+
+    /* نص القصيدة */
+    .poem-text-wrapper {
+        max-height: 150px;
+        width: 100%;
+    }
+
+    .poem-content {
+        font-size: 0.98rem;
+        line-height: 1.7;
+        padding: 0 5px;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    /* أزرار الكرت */
+    .poem-actions {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .btn-action-glow,
+    .btn-action-outline {
+        width: 100%;
+        min-width: 0;
+        justify-content: center;
+        padding: 11px 12px;
+    }
+
+    /* المودال */
+    .poem-modal-overlay {
+        padding: 12px;
+        align-items: center;
+    }
+
+    .poem-modal-card {
+        width: 100%;
+        max-width: 100%;
+        max-height: 92vh;
+        border-radius: 18px;
+    }
+
+    .modal-header {
+        padding: 16px 18px;
+    }
+
+    .modal-header h3 {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .modal-content,
+    .modal-scrollable-content {
+        padding: 18px 16px;
+    }
+
+    .modal-footer {
+        padding: 12px 16px 16px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-submit,
+    .btn-cancel {
+        width: 100%;
+        flex: none;
+    }
+
+}
+
+
+/* =========================================================
+   📱 الهواتف الصغيرة جدًا
+   ========================================================= */
+
+@media (max-width: 430px) {
+
+    .poems-container {
+        padding: 78px 10px 20px;
+        margin: 0;
+        width: 100%;
+    }
+
+    .poems-header {
+        padding: 16px 12px;
+        margin-bottom: 52px;
+        border-radius: 14px;
+    }
+
+    .poems-header h2 {
+        font-size: 0.95rem;
+        line-height: 1.8;
+    }
+
+    .poems-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 62px;
+    }
+
+    .poem-card {
+        width: 100%;
+        border-radius: 18px;
+        padding-top: 56px;
+    }
+
+    .poem-body {
+        padding: 20px 12px 15px;
+    }
+
+    .poem-body h3 {
+        font-size: 1.05rem;
+    }
+
+    .poem-divider {
+        margin-bottom: 15px;
+    }
+
+    .poem-content {
+        font-size: 0.92rem;
+        line-height: 1.7;
+        padding: 0 3px;
+    }
+
+    .poem-circle-frame {
+        width: 82px;
+        height: 82px;
+    }
+
+    .poem-avatar-container {
+        top: -39px;
+    }
+
+    .btn-read-more {
+        font-size: 0.78rem;
+        margin-bottom: 15px;
+    }
+
+    .poem-actions {
+        gap: 8px;
+    }
+
+    .btn-action-glow,
+    .btn-action-outline {
+        font-size: 0.78rem;
+        padding: 10px 8px;
+    }
+
+    /* المودال على الهاتف */
+    .poem-modal-overlay {
+        padding: 8px;
+    }
+
+    .poem-modal-card {
+        width: 100%;
+        max-height: 94vh;
+        border-radius: 16px;
+    }
+
+    .modal-header {
+        padding: 14px;
+    }
+
+    .modal-header h3 {
+        font-size: 0.9rem;
+    }
+
+    .close-btn {
+        font-size: 1.7rem;
+    }
+
+    .modal-content,
+    .modal-scrollable-content {
+        padding: 15px 12px;
+    }
+
+    .form-group {
+        margin-bottom: 17px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        font-size: 0.85rem;
+        padding: 12px;
+    }
+
+    .modal-footer {
+        padding: 10px 12px 14px;
+    }
+
+}
+
+
+/* =========================================================
+   📱 الشاشات الصغيرة جدًا 360px وأقل
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+    .poems-container {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .poems-header h2 {
+        font-size: 0.88rem;
+    }
+
+    .poem-card {
+        padding-top: 54px;
+    }
+
+    .poem-body {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .poem-content {
+        font-size: 0.88rem;
+    }
+
+    .btn-action-glow,
+    .btn-action-outline {
+        font-size: 0.74rem;
+    }
+
+}
+
 </style>
 
 <div class="poems-container">
