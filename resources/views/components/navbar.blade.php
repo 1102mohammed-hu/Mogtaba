@@ -10,10 +10,10 @@
 
 
 
-            <span>
-                {{ Str::before($userData->name, ' ') }}
-            </span>
+         
             <h1>
+                  {{ Str::before($userData->name, ' ') }}
+
                 {{ Str::after($userData->name, ' ') }}
             </h1>
         </a>
@@ -522,7 +522,7 @@ document.addEventListener('DOMContentLoaded', function () {
     margin: 0;
 
     font-size: 36px;
-
+font-family: Aldhabi;
     font-weight: 900;
 }
 
@@ -1399,6 +1399,7 @@ body.mobile-menu-open {
 
         width:
             calc(100% - 20px);
+            font-family: Aldhabi;
     }
 
 
@@ -1453,7 +1454,7 @@ body.mobile-menu-open {
 @media (max-width: 430px) {
 
     .premium-nav {
-
+font-family: Aldhabi;
         top: 7px;
 
         width:
@@ -1472,6 +1473,7 @@ body.mobile-menu-open {
     .logo h1 {
 
         font-size: 19px;
+        font-family: Aldhabi;
     }
 
 
